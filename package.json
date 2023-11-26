@@ -1,0 +1,18 @@
+{
+  "name": "MC-Notifier-JS",
+  "version": "1.0.0",
+  "description": "MC-Notifier-JS",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "yarn nodemon server.mjs",
+    "start:prod": "NODE_ENV=production yarn nodemon server.mjs",
+    "debug": "yarn ndb server.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "minecraft-server-util": "^5.4.4",
+    "node-fetch": "^3.3.1",
+    "nodemon": "^3.0.1"
+  }
+}
