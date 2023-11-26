@@ -145,7 +145,7 @@ Line 2
 ```bash
 import { Auth, Lobby } from '../servers/Servers.mjs';
 ```
-In this case, `Auth` & `Lobby` are the constants that have the servers information you have to import all the servers you want to monitor here. See [`Servers.mjs`](#-serversmjs-) for more info.
+In this case, `Auth` & `Lobby` are the constants that have the servers information you have to import all the servers you want to monitor here. See [`Servers.mjs`](#serversmjs) for more info.
 
 Line 9
 ```bash
@@ -165,7 +165,7 @@ Line 12 to 20
     //   await FetchServers(Lobby);
     // }
 ```
-Here is where the workers that we created before are going to fetch the servers. See [`server.mjs`](#-servermjs-) for more info.
+Here is where the workers that we created before are going to fetch the servers. See [`server.mjs`](#servermjs) for more info.
 - taskId: is the worker number that you assigned in the file `server.mjs`, you want to keep the numbering.
 - FetchServers(): is the function that will fetch your server. every taskid has to have a different and unique server.
 
