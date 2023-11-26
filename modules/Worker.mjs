@@ -10,13 +10,13 @@ async function performTask(taskId) {
   
   const task = async () => {
     if (taskId === 1) {
-      await FetchServers(Auth.serverIP, Auth.serverPort, Auth.name, Auth.serverURL);
+      await FetchServers(Auth);
     }
     if (taskId === 2) {
-      await FetchServers(Lobby.serverIP, Lobby.serverPort, Lobby.name, Lobby.serverURL);
+      await FetchServers(Lobby);
     }
     // if (taskId === 5) {
-    //   await FetchServers(Lobby.serverIP, Lobby.serverPort, Lobby.name, Lobby.serverURL);
+    //   await FetchServers(Lobby);
     // }
   };
 
