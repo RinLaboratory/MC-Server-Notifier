@@ -11,7 +11,7 @@ export async function FetchServers(Server) {
     try {
         const response = await mcutil.status(Server.serverIP, Server.serverPort, { timeout: 15000 })
         if (!lastOnlineStatus) {
-            fetchDiscordWebHook( OnlineServer(Server.serverName, Server.serverURL), response, Server.serverName )
+            fetchDiscordWebHook( OnlineServer(Server.name, Server.serverURL), response, Server.name )
             lastErrorStatus = false
         }
         lastOnlineStatus = true
@@ -20,15 +20,15 @@ export async function FetchServers(Server) {
         if(!lastErrorStatus)
         {
             if (error.message === 'Server is offline or unreachable' || `connect ECONNREFUSED ${Server.serverIP}:${Server.serverPort}`) {
-                fetchDiscordWebHook( OfflineServer(Server.serverName, Server.serverURL), { version: { name: 'Unknown - Offline' }, serverName: Server.serverName })
+                fetchDiscordWebHook( OfflineServer(Server.name, Server.serverURL), { version: { name: 'Unknown - Offline' }, serverName: Server.name })
                 lastOnlineStatus = false
                 lastErrorStatus = true
             }
             else if (error.message === 'Socket closed unexpectedly while waiting for data') {
-                console.warn("Server ["+ Server.serverName + "]: " +error.message)
+                console.warn("Server ["+ Server.name + "]: " +error.message)
             } else {
-                fetchDiscordWebHook( UnknownError(Server.serverName, ThisContainer.serverURL), { version: { name: 'Unknown - Error' }, serverName: Server.serverName })
-                console.warn('Server ['+ Server.serverName + ']: Ocurrió un error inesperado. traceback: ' + error)
+                fetchDiscordWebHook( UnknownError(Server.name, ThisContainer.serverURL), { version: { name: 'Unknown - Error' }, serverName: Server.name })
+                console.warn('Server ['+ Server.name + ']: Ocurrió un error inesperado. traceback: ' + error)
                 lastErrorStatus = true
             }
         }
