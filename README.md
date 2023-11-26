@@ -18,10 +18,10 @@ yarn
 
 You will need to modify the following files to fully set up this server
 
-- [https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/messages/ServerStatus.mjs](ServerStatus.mjs)
-- [https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/servers/Servers.mjs](Servers.mjs)
-- [https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/server.mjs](server.mjs)
-- [https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/modules/Worker.mjs](Worker.mjs)
+- [ServerStatus.mjs](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/messages/ServerStatus.mjs)
+- [Servers.mjs](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/servers/Servers.mjs)
+- [server.mjs](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/server.mjs)
+- [Worker.mjs](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/modules/Worker.mjs)
 - .env
 
 # `ServerStatus.mjs`
@@ -58,7 +58,7 @@ export const Server = {
 - name: is the name of the server you want to monitor
 - serverIP: is the internal server IP you want to monitor. You want to use `localhost` or `127.0.0.1` if is in your local machine. if this is located somewhere else, you have to put that machine IP and make sure your firewall is well set-up.
 - serverPort: is the Port of the server you want to monitor.
-- serverURL: If you are using a panel web server Like [https://pterodactyl.io/](Pterodactyl) you want to paste the server url you want to monitor here. it looks something like `https://yourServerURLhere.com/server/a000b000`.
+- serverURL: If you are using a panel web server Like [Pterodactyl](https://pterodactyl.io/) you want to paste the server url you want to monitor here. it looks something like `https://yourServerURLhere.com/server/a000b000`.
 
 TIP: I **do not recommend** to monitor a **BungeeCord (waterfall, velocity, whatever...)** server because it has a **high false-positive rate**. if you want to monitor that type of server, you are crazy and need to configure it well.
 
@@ -160,7 +160,7 @@ Here is where the workers that we created before are going to fetch the servers.
 - FetchServers(): is the function that will fetch your server. every taskid has to have a different and unique server.
 
 ## Understanding `.env` file
-See [https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/.env.example](.env.example) for more info.
+See [.env.example](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/.env.example) for more info.
 TIP: if you dont understand, you have to create the `.env` file, using the contents of the `.env.example` file.
 
 This server works with Discord Webhooks, and you will need the following information to make it work:
@@ -173,8 +173,8 @@ if that information was not self explanatory, please read the following:
 
 # How to set up a Discord WebHook
 
-- [How to discord webhook part 1](https://cdn.discordapp.com/attachments/826094336169082920/1178157653394984990/Captura_de_pantalla_2023-11-25_231635.png?ex=65751fd1&is=6562aad1&hm=547330b2963d98def906e9a77d47a00ab583aa438417eb79420e5f6d6959c2fa&)
-- [How to discord webhook part 2](https://cdn.discordapp.com/attachments/826094336169082920/1178157653017493565/Captura_de_pantalla_2023-11-25_231720.png?ex=65751fd1&is=6562aad1&hm=cb304952bbe48b936d8b13bd76e8f5c9744aa256717a3f2944bb456f812b581b&)
+- ![How to discord webhook part 1](https://cdn.discordapp.com/attachments/826094336169082920/1178157653394984990/Captura_de_pantalla_2023-11-25_231635.png?ex=65751fd1&is=6562aad1&hm=547330b2963d98def906e9a77d47a00ab583aa438417eb79420e5f6d6959c2fa&)
+- ![How to discord webhook part 2](https://cdn.discordapp.com/attachments/826094336169082920/1178157653017493565/Captura_de_pantalla_2023-11-25_231720.png?ex=65751fd1&is=6562aad1&hm=cb304952bbe48b936d8b13bd76e8f5c9744aa256717a3f2944bb456f812b581b&)
 
 once you have copied your webhook URL, you paste it in the `.env` file in the section `DISCORD_WEBHOOK_URL`, It will look like this.
 ```bash
