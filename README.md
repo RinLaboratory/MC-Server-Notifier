@@ -100,6 +100,16 @@ worker3.on('message', message => {
 ```
 Each worker has to be instantiated. you want to keep the numbering.
 
+Line 27 to 31
+```bash
+// Enviar mensaje inicial a cada hilo de trabajador para iniciar las tareas
+worker1.postMessage('1');
+worker2.postMessage('2');
+worker3.postMessage('3');
+// worker4.postMessage('4');
+```
+Each worker has to be initiated in order to work. you want to keep the numbering.
+
 Line 38 to 56
 ```bash
 // Manejar la finalización del hilo de trabajador
@@ -122,7 +132,7 @@ console.log(`Hilo de trabajador finalizado con código de salida ${code}`);
 // console.log(`Hilo de trabajador finalizado con código de salida ${code}`);
 // });
 ```
-Each worker has to be initiated in order to work. you want to keep the numbering.
+Each worker has to have a ending logic, even if its never reached. you want to keep the numbering.
 
 Once that is ready we can take the next step.
 
