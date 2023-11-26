@@ -1,6 +1,24 @@
 # MC-Server-Notifier
 Minecraft Server Availability Notifier
 
+
+## Table of contents (TOC)
+
+- [MC-Server-Notifier](#mc-server-notifier)
+- [Table of contents (TOC)](#table-of-contents-toc)
+- [Getting dependencies installed](#getting-dependencies-installed)
+- [Setting up the server](#setting-up-the-server)
+  * [`ServerStatus.mjs`](#serverstatusmjs)
+  * [`Servers.mjs`](#serversmjs)
+  * [`server.mjs`](#servermjs)
+  * [`Worker.mjs`](#workermjs)
+  * [Understanding `.env` file](#understanding-env-file)
+- [How to set up a Discord WebHook](#how-to-set-up-a-discord-webhook)
+- [Getting the development server running](#getting-the-development-server-running)
+- [Getting the production server running](#getting-the-production-server-running)
+- [Learn More](#learn-more)
+
+
 ## Getting dependencies installed
 
 You will require the next dependencies to run this project:
