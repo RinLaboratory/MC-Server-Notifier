@@ -39,9 +39,13 @@ Mentions.push("<@PrimaryDiscordID>")
 Mentions.push("<@SecondaryDiscordID>")
 ```
 "PrimaryDiscordID" is a Discord user ID and it may belong to someone who has access to this server.
+
 "SecondaryDiscordID" is a Discord user ID and it may belong to someone who has access to the server thats being monitored.
+
 You can actually add as many as Discord user ID as you want by Ctrl+C / Ctrl+V `Mentions.push("<@SomeDiscordUserID>")` below line 25. 
+
 I recommend to be at least two people and at most 4 people. You dont want to mass ping someone for no reason.
+
 
 # `Servers.mjs`
 This file has JSON format constants and it contains all the servers you want to monitor.
@@ -55,19 +59,23 @@ export const Server = {
     serverURL: 'https://yourServerURLhere.com',
 }
 ```
-- name: is the name of the server you want to monitor
-- serverIP: is the internal server IP you want to monitor. You want to use `localhost` or `127.0.0.1` if is in your local machine. if this is located somewhere else, you have to put that machine IP and make sure your firewall is well set-up.
-- serverPort: is the Port of the server you want to monitor.
-- serverURL: If you are using a panel web server Like [Pterodactyl](https://pterodactyl.io/) you want to paste the server url you want to monitor here. it looks something like `https://yourServerURLhere.com/server/a000b000`.
+- `name`: is the name of the server you want to monitor
+- `serverIP`: is the internal server IP you want to monitor. You want to use `localhost` or `127.0.0.1` if is in your local machine. if this is located somewhere else, you have to put that machine IP and make sure your firewall is well set-up.
+- `serverPort`: is the Port of the server you want to monitor.
+- `serverURL`: If you are using a panel web server Like [Pterodactyl](https://pterodactyl.io/) you want to paste the server url you want to monitor here. it looks something like `https://yourServerURLhere.com/server/a000b000`.
 
-TIP: I **do not recommend** to monitor a **BungeeCord (waterfall, velocity, whatever...)** server because it has a **high false-positive rate**. if you want to monitor that type of server, you are crazy and need to configure it well.
+TIP: I **do not recommend** to monitor a **BungeeCord (waterfall, velocity, whatever...)** server because it has a **high false-positive rate**. 
+
+If you want to monitor that type of server, you are crazy and need to configure it well.
 
 Once this file has all the servers you want to monitor, we can take the next step.
+
 
 # `server.mjs`
 This is the main file where all servers constantly fetch using workers.
 
-you may add as many workers as you want, but i would not exceed 8 servers.
+You may add as many workers as you want, but i would not exceed 8 servers.
+
 Keep note that every snippet of code here has at least a commented example (`worker4`) for you to understand.
 
 Line 6 to 10
@@ -136,6 +144,7 @@ Each worker has to have a ending logic, even if its never reached. you want to k
 
 Once that is ready we can take the next step.
 
+
 # `Worker.mjs`
 This file is the logic where the servers fetch. you will modify this file as your needs.
 
@@ -169,8 +178,10 @@ Here is where the workers that we created before are going to fetch the servers.
 - taskId: is the worker number that you assigned in the file `server.mjs`, you want to keep the numbering.
 - FetchServers(): is the function that will fetch your server. every taskid has to have a different and unique server.
 
+
 ## Understanding `.env` file
 See [.env.example](https://github.com/RinLaboratory/MC-Server-Notifier/blob/main/.env.example) for more info.
+
 TIP: if you dont understand, you have to create the `.env` file, using the contents of the `.env.example` file.
 
 This server works with Discord Webhooks, and you will need the following information to make it work:
@@ -180,6 +191,7 @@ DISCORD_WEBHOOK_NAME=''
 DISCORD_WEBHOOK_PROFILEPICTURE=''
 ```
 if that information was not self explanatory, please read the following:
+
 
 # How to set up a Discord WebHook
 
@@ -200,6 +212,7 @@ DISCORD_WEBHOOK_NAME='Your amazing name'
 DISCORD_WEBHOOK_PROFILEPICTURE='https://urlOfYourAmazingPfp.com'
 ```
 
+
 ## Getting the development server running
 
 To run the development server, you will use the following command:
@@ -208,6 +221,7 @@ To run the development server, you will use the following command:
 yarn dev
 ```
 
+
 ## Getting the production server running
 
 Use the following command to run the production server:
@@ -215,6 +229,7 @@ Use the following command to run the production server:
 ```bash
 yarn start
 ```
+
 
 ## Learn More
 
