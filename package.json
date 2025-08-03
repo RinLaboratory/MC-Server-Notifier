@@ -16,8 +16,10 @@
     "with-env": "dotenv -e ./.env --"
   },
   "dependencies": {
+    "discord.js": "^14.21.0",
     "minecraft-server-util": "^5.4.4",
     "remeda": "^2.21.5",
+    "systeminformation": "^5.27.7",
     "yaml": "^2.8.0",
     "zod": "^3.25.57"
   },
