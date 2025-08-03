@@ -1,0 +1,20 @@
+# server config
+# Template
+# servers:
+#   - name: "Proxy"
+#     config:
+#       - serverIP: "127.0.0.1"
+#       - serverPort: 25565,
+#       - serverURL: "https://yourServerURLhere.com"
+
+servers:
+  - name: "Proxy"
+    config:
+      serverIP: "127.0.0.1"
+      serverPort: 25565
+      serverURL: "https://yourServerURLhere.com"
+  - name: "Auth"
+    config:
+      serverIP: "127.0.0.1"
+      serverPort: 25565
+      serverURL: "https://yourServerURLhere.com"
