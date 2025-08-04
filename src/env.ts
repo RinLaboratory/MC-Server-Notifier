@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const envValidationSchema = z.object({
-  NODE_ENV: z.enum(["development", "production"]).default("development"),
+  NODE_ENV: z.enum(["development", "production"]).default("production"),
 });
 
 export const env = {
