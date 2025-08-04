@@ -53,10 +53,11 @@ discordConfig:
   DISCORD_BOT_CLIENT_ID: "000000000000000000" # Your BOT user id
   DISCORD_BOT_GUILD_ID: "000000000000000000" # Your Server Id
   DISCORD_BOT_CHANNEL_ID: "000000000000000000" # The Channel you want this bot to send messages
+  DISCORD_BOT_TOKEN: "" # Your BOT auth token
   mentionUsers:
     - "000000000000000000" # The user id's that this bot will mention if something goes wrong
 servers:
-  - name: "Proxy" # Server name
+  - name: "Auth" # Server name
     isMachine: true # whether this is a machine or a minecraft server
     config:
       - serverIP: "127.0.0.1" # Server ip
@@ -77,8 +78,6 @@ TIP: if you dont understand, you have to create the `.env` file, using the conte
 This server works with Discord Bots, and you will need the following information to make it work:
 
 ```bash
-DISCORD_BOT_TOKEN=''
-
 NODE_ENV=development
 ```
 
