@@ -2,9 +2,7 @@ import { z } from "zod";
 
 const envValidationSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]).default("development"),
-  DISCORD_WEBHOOK_URL: z.string().url(),
-  DISCORD_WEBHOOK_NAME: z.string(),
-  DISCORD_WEBHOOK_PROFILEPICTURE: z.string().url(),
+  DISCORD_BOT_TOKEN: z.string(),
 });
 
 export const env = {
