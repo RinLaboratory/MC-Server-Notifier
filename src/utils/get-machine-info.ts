@@ -15,7 +15,7 @@ export async function getCurrentMachineInfo() {
 
   return {
     load: load.currentLoad,
-    ramUsage: (ramUsage.used * 100) / ramUsage.available,
+    ramUsage: ((ramUsage.total - ramUsage.available) * 100) / ramUsage.total,
     diskUsage: currentDiskUsage,
   };
 }
