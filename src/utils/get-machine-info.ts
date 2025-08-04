@@ -1,5 +1,6 @@
 import si from "systeminformation";
 import type { TSystemStatus, TServer } from "./validators";
+import logger from "./logger";
 
 export async function getCurrentMachineInfo() {
   const load = await si.currentLoad();
@@ -28,7 +29,10 @@ export async function getOtherMachineInfo({ config }: TServer) {
       `http://${serverIP}:${serverPort}/status`,
     )) as unknown as TSystemStatus | undefined;
   } catch (error) {
-    console.error(error);
+    logger.error(
+      `Failed to fetch other machine ${serverIP}:${serverPort}`,
+      error,
+    );
     return undefined;
   }
 }

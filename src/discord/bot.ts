@@ -6,6 +6,7 @@ import type { TServerResponse, TYamlConfig } from "~/utils/validators";
 import { arrangeServers } from "./arrange-servers";
 import { fetchServer } from "~/utils/fetch-server";
 import { store } from "~/store/shared-store";
+import logger from "~/utils/logger";
 
 interface DiscordBotProps {
   file: TYamlConfig;
@@ -23,7 +24,7 @@ export async function discordBot({ file }: DiscordBotProps) {
   });
 
   const { DISCORD_BOT_TOKEN, channelId } = store.getState();
-  if (!channelId) throw new Error("Invalid channel Id");
+  if (!channelId) return logger.fatal("Invalid channelId");
 
   const arrangedServers: APIEmbedField[][] = [];
 
@@ -36,19 +37,19 @@ export async function discordBot({ file }: DiscordBotProps) {
 
     // OBTENER SERVIDOR ACTUAL
     const guild = client.guilds.cache.get(discordConfig.DISCORD_BOT_GUILD_ID);
-    if (!guild) return;
+    if (!guild) return logger.fatal("server not found");
 
     // OBTENER CANAL DESIGNADO
     const targetChannel = guild.channels.cache.get(channelId) as
       | TextChannel
       | undefined;
-    if (!targetChannel) return;
+    if (!targetChannel) return logger.fatal("channel not found");
 
     try {
       // BORRAR TODOS LOS MENSAJES DEL CANAL
       await targetChannel.bulkDelete(100);
     } catch (error) {
-      console.error("Error al borrar mensajes:", error);
+      logger.error("Error al borrar mensajes:", error);
     }
 
     const serverResponse: TServerResponse[] = [];

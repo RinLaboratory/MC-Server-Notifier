@@ -1,5 +1,6 @@
 import type { Client, TextChannel } from "discord.js";
 import { store } from "~/store/shared-store";
+import logger from "~/utils/logger";
 import type { TServer } from "~/utils/validators";
 
 interface MentionPeopleProps {
@@ -13,7 +14,9 @@ export default async function mentionPeople({
 }: MentionPeopleProps) {
   const { lastMentionMessage, channelId, userMentions, mentionReason } =
     store.getState();
-  if (!channelId) throw new Error("Invalid channel Id");
+  if (!channelId) {
+    return logger.fatal("Invalid channelId");
+  }
 
   const channel = client.channels.cache.get(channelId) as
     | TextChannel

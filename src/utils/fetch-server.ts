@@ -1,5 +1,6 @@
 import mcutil from "minecraft-server-util";
 import type { TServer, TServerResponse } from "./validators";
+import logger from "./logger";
 
 export async function fetchServer(server: TServer): Promise<TServerResponse> {
   try {
@@ -30,9 +31,9 @@ export async function fetchServer(server: TServer): Promise<TServerResponse> {
       } else if (
         error.message === "Socket closed unexpectedly while waiting for data"
       ) {
-        console.warn(`Server ["${server.name}"]: ${error.message}`);
+        logger.warn(`Server ["${server.name}"]: ${error.message}`);
       } else {
-        console.error(
+        logger.error(
           `Server ["${server.name}"]: Ocurrió un error inesperado. traceback:`,
           error.cause,
         );
