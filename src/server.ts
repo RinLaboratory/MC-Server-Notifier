@@ -5,12 +5,10 @@ import { discordBot } from "./discord/bot";
 import editMessage from "./discord/edit-message";
 import type { TServerResponse } from "./utils/validators";
 import { store } from "./store/shared-store";
-import { parseMentionUsers } from "./utils/parse-mention-users";
 
 export default async function createApp() {
   const file = await LoadYaml();
   const { servers, discordConfig } = file;
-  parseMentionUsers(discordConfig.mentionUsers);
 
   const { client, arrangedServers } = await discordBot({
     file,

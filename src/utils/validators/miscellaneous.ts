@@ -21,6 +21,7 @@ export const discordConfigSchema = z.object({
   DISCORD_BOT_CLIENT_ID: z.string(),
   DISCORD_BOT_GUILD_ID: z.string(),
   DISCORD_BOT_CHANNEL_ID: z.string(),
+  DISCORD_BOT_TOKEN: z.string(),
   mentionUsers: z.array(z.string().regex(/^\d{17,20}$/)),
 });
 

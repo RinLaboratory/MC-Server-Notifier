@@ -2,7 +2,6 @@
 import type { APIEmbedField, TextChannel } from "discord.js";
 import { Client, EmbedBuilder, GatewayIntentBits } from "discord.js";
 import { REST } from "discord.js";
-import { env } from "~/env";
 import type { TServerResponse, TYamlConfig } from "~/utils/validators";
 import { arrangeServers } from "./arrange-servers";
 import { FetchServer } from "~/utils/fetch-server";
@@ -23,14 +22,14 @@ export async function discordBot({ file }: DiscordBotProps) {
     ],
   });
 
-  const channelId = discordConfig.DISCORD_BOT_CHANNEL_ID;
-  store.setState({ channelId });
+  const { DISCORD_BOT_TOKEN, channelId } = store.getState();
+  if (!channelId) throw new Error("Invalid channel Id");
 
   const arrangedServers: APIEmbedField[][] = [];
 
-  new REST({ version: "10" }).setToken(env.DISCORD_BOT_TOKEN);
+  new REST({ version: "10" }).setToken(DISCORD_BOT_TOKEN);
 
-  await client.login(env.DISCORD_BOT_TOKEN);
+  await client.login(DISCORD_BOT_TOKEN);
 
   client.on("ready", async () => {
     console.log(`Logged in as ${client.user?.tag}!`);
