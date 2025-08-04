@@ -80,6 +80,7 @@ async function updateServersArrangement({
     } else {
       const ServerInfo = await serverStatus({
         client,
+        server,
         serverResponse: response,
       });
       arrangedServers.push([
