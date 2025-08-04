@@ -1,13 +1,38 @@
 # server config
 # Template
+# discordConfig:
+#   DISCORD_BOT_CLIENT_ID: "000000000000000000" # Your BOT user id
+#   DISCORD_BOT_GUILD_ID: "000000000000000000" # Your Server Id
+#   DISCORD_BOT_CHANNEL_ID: "000000000000000000" # The Channel you want this bot to send messages
+#   mentionUsers:
+#     - "000000000000000000" # The user id's that this bot will mention if something goes wrong
 # servers:
-#   - name: "Proxy"
+#   - name: "Proxy" # Server name
 #     config:
-#       - serverIP: "127.0.0.1"
-#       - serverPort: 25565,
-#       - serverURL: "https://yourServerURLhere.com"
+#       - serverIP: "127.0.0.1" # Server ip
+#       - serverPort: 25565, # Server port
+#       - serverURL: "https://yourServerURLhere.com" # If you have a web server like pterodactyl, paste the url here and it will display it as part of the message for easy access
+#   - name: "localhost"
+#     isMachine: true # whether this is a machine or a minecraft server
+#     config:
+#       serverIP: "127.0.0.1"
+#       serverPort: 1
+#       serverURL: "https://yourServerURLhere.com"
+
+discordConfig:
+  DISCORD_BOT_CLIENT_ID: "000000000000000000"
+  DISCORD_BOT_GUILD_ID: "000000000000000000"
+  DISCORD_BOT_CHANNEL_ID: "000000000000000000"
+  mentionUsers:
+    - "000000000000000000"
 
 servers:
+  - name: "localhost"
+    isMachine: true
+    config:
+      serverIP: "127.0.0.1"
+      serverPort: 1
+      serverURL: "https://yourServerURLhere.com"
   - name: "Proxy"
     config:
       serverIP: "127.0.0.1"

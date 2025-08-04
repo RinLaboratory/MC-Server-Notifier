@@ -1,3 +1,4 @@
+import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import z from "zod";
 
 const ConfigSchema = z.object({
@@ -10,21 +11,27 @@ export type TServerConfig = z.infer<typeof ConfigSchema>;
 
 export const ServerSchema = z.object({
   name: z.string(),
+  isMachine: z.coerce.boolean().optional(),
   config: ConfigSchema,
 });
 
 export type TServer = z.infer<typeof ServerSchema>;
 
+export const discordConfigSchema = z.object({
+  DISCORD_BOT_CLIENT_ID: z.string(),
+  DISCORD_BOT_GUILD_ID: z.string(),
+  DISCORD_BOT_CHANNEL_ID: z.string(),
+  mentionUsers: z.array(z.string().regex(/^\d{17,20}$/)),
+});
+
+export type TDiscordConfig = z.infer<typeof discordConfigSchema>;
+
 export const YamlConfigSchema = z.object({
   servers: z.array(ServerSchema),
+  discordConfig: discordConfigSchema,
 });
 
 export type TYamlConfig = z.infer<typeof YamlConfigSchema>;
-
-export interface SetupWorkerProps {
-  workerPosition: number;
-  server: TServer;
-}
 
 export interface DiscordMessage {
   username: string;
@@ -38,4 +45,15 @@ export interface DiscordMessage {
     };
     fields: { name: string; value: string; inline: boolean }[];
   }[];
+}
+
+export interface TServerResponse {
+  server: TServer;
+  response: Partial<JavaStatusLegacyResponse>;
+}
+
+export interface TSystemStatus {
+  load: number;
+  ramUsage: number;
+  diskUsage: number;
 }
