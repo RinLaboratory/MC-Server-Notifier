@@ -3,15 +3,21 @@ import type { Message } from "discord.js";
 interface State {
   lastEmbedMessage: Message | undefined;
   lastMentionMessage: Message | undefined;
+  mentionReason: string[];
+  memorizedLastMentionTimestamp: { serverName: string; timestamp: number }[];
   channelId: string | undefined;
   userMentions: string[];
+  DISCORD_BOT_TOKEN: string;
 }
 
 let state: State = {
   lastEmbedMessage: undefined,
   lastMentionMessage: undefined,
+  mentionReason: [],
+  memorizedLastMentionTimestamp: [],
   channelId: undefined,
   userMentions: [],
+  DISCORD_BOT_TOKEN: "",
 };
 
 export const store = {

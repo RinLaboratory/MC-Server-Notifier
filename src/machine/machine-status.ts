@@ -55,7 +55,7 @@ export async function getMachineStatus({
   ];
 
   if (!isStatusAcceptable) {
-    await mentionPeople({ client });
+    await mentionPeople({ client, server });
   }
 
   return currentMachineData;
