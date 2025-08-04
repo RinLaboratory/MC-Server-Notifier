@@ -34,20 +34,6 @@ export const YamlConfigSchema = z.object({
 
 export type TYamlConfig = z.infer<typeof YamlConfigSchema>;
 
-export interface DiscordMessage {
-  username: string;
-  avatar_url: string;
-  content: string;
-  embeds: {
-    title: string;
-    color: number;
-    thumbnail: {
-      url: string;
-    };
-    fields: { name: string; value: string; inline: boolean }[];
-  }[];
-}
-
 export interface TServerResponse {
   server: TServer;
   response: Partial<JavaStatusLegacyResponse>;
