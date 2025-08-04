@@ -2,6 +2,7 @@ import type { APIEmbedField, Client } from "discord.js";
 import { getMachineStatus } from "~/machine/machine-status";
 import type { TServer, TServerResponse } from "~/utils/validators";
 import serverStatus from "./server-status";
+import { store } from "~/store/shared-store";
 
 interface BaseArrangementProps {
   arrangedServers: APIEmbedField[][];
@@ -83,6 +84,12 @@ async function updateServersArrangement({
         server,
         serverResponse: response,
       });
+
+      const { memorizedLastMentionTimestamp } = store.getState();
+      const lastMentionedServer = memorizedLastMentionTimestamp.find(
+        (value) => value.serverName === server.name,
+      );
+
       arrangedServers.push([
         {
           name: server.name,
@@ -95,8 +102,10 @@ async function updateServersArrangement({
           inline: true,
         },
         {
-          name: "\u200b",
-          value: "\u200b",
+          name: "Ult. Aviso",
+          value: lastMentionedServer
+            ? `<t:${lastMentionedServer.timestamp}:R>`
+            : "Nunca",
           inline: true,
         },
       ]);

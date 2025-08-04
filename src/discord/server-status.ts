@@ -17,6 +17,27 @@ export default async function serverStatus({
 }: ServerStatusProps) {
   if (serverResponse.version?.name === "Unknown - Offline") {
     await mentionPeople({ client, server });
+
+    const message = {
+      serverName: server.name,
+      timestamp: Math.floor(new Date().valueOf() / 1000),
+    };
+
+    const { memorizedLastMentionTimestamp } = store.getState();
+    const index = memorizedLastMentionTimestamp.findIndex(
+      (value) => value.serverName === server.name,
+    );
+
+    if (index > -1) {
+      // Server was mentioned before
+      memorizedLastMentionTimestamp[index] = message;
+    } else {
+      // First time of server being mentioned
+      memorizedLastMentionTimestamp.push(message);
+    }
+
+    store.setState({ memorizedLastMentionTimestamp });
+
     return " ⚠️ Fuera de línea";
   } else {
     const { lastMentionMessage, mentionReason } = store.getState();
