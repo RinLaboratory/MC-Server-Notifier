@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FetchServer } from "./utils/fetch-server";
-import LoadYaml from "./utils/load-yaml";
+import { fetchServer } from "./utils/fetch-server";
+import loadYaml from "./utils/load-yaml";
 import { discordBot } from "./discord/bot";
 import editMessage from "./discord/edit-message";
 import type { TServerResponse } from "./utils/validators";
 import { store } from "./store/shared-store";
 
 export default async function createApp() {
-  const file = await LoadYaml();
+  const file = await loadYaml();
   const { servers, discordConfig } = file;
 
   const { client, arrangedServers } = await discordBot({
@@ -34,7 +34,7 @@ export default async function createApp() {
   const task = async () => {
     const serverResponse: TServerResponse[] = [];
     for (const server of servers) {
-      serverResponse.push(await FetchServer(server));
+      serverResponse.push(await fetchServer(server));
     }
 
     await editMessage({

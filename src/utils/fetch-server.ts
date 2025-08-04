@@ -1,7 +1,7 @@
 import mcutil from "minecraft-server-util";
 import type { TServer, TServerResponse } from "./validators";
 
-export async function FetchServer(server: TServer): Promise<TServerResponse> {
+export async function fetchServer(server: TServer): Promise<TServerResponse> {
   try {
     const response = await mcutil.status(
       server.config.serverIP,

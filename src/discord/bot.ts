@@ -4,7 +4,7 @@ import { Client, EmbedBuilder, GatewayIntentBits } from "discord.js";
 import { REST } from "discord.js";
 import type { TServerResponse, TYamlConfig } from "~/utils/validators";
 import { arrangeServers } from "./arrange-servers";
-import { FetchServer } from "~/utils/fetch-server";
+import { fetchServer } from "~/utils/fetch-server";
 import { store } from "~/store/shared-store";
 
 interface DiscordBotProps {
@@ -53,7 +53,7 @@ export async function discordBot({ file }: DiscordBotProps) {
 
     const serverResponse: TServerResponse[] = [];
     for (const server of servers) {
-      serverResponse.push(await FetchServer(server));
+      serverResponse.push(await fetchServer(server));
     }
 
     await arrangeServers({

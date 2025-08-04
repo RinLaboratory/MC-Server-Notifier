@@ -5,7 +5,7 @@ import { YamlConfigSchema } from "./validators";
 import { parseMentionUsers } from "./parse-mention-users";
 import { store } from "~/store/shared-store";
 
-export default async function LoadYaml() {
+export default async function loadYaml() {
   const fileRoute = path.join(import.meta.dirname, "..", "config.yaml");
   const loadedFile = await fs.readFile(fileRoute, { encoding: "utf8" });
 
