@@ -1,0 +1,31 @@
+lang:
+  commands:
+    reload:
+      reply: "Configuración recargada exitosamente"
+      description: "Recarga la configuración"
+    error: "Ha ocurrido un error al ejecutar este comando"
+  embed:
+    title: "Server Status"
+    description: "Servidores bajo observación"
+    footer: "Última Actualización"
+  server:
+    first-column:
+      top: "{{server_name}}"
+      bottom: "{{server_status}}"
+    middle-column:
+      top: "{{server_runtime}}"
+      bottom: "{{server_url}}"
+    last-column:
+      top: "Ult. Aviso"
+      bottom: "{{last_available}}"
+    status:
+      offline: " ⚠️ Fuera de línea"
+      online: "  🟢 En línea"
+    last-fetch:
+      never: "Nunca"
+  machine:
+    cpu-usage: "{{machine_name}} USO DE CPU"
+    ram-usage: "{{machine_name}} USO DE RAM"
+    disk-usage: "{{machine_name}} USO DE DISCO"
+  perms:
+    missing-perms: "No tienes permisos"

@@ -3,6 +3,7 @@ import {
   getCurrentMachineInfo,
   getOtherMachineInfo,
 } from "~/utils/get-machine-info";
+import { t } from "~/utils/translations";
 import { validateLocalhostIp } from "~/utils/validate-localhost-ip";
 import type { TServer, TSystemStatus } from "~/utils/validators";
 
@@ -36,17 +37,23 @@ export async function getMachineStatus({
 
   const currentMachineData = [
     {
-      name: `${server.name} USO DE CPU`,
+      name: t("machine.cpu-usage", {
+        machine_name: server.name,
+      }),
       value: `${machine?.load.toFixed(1)} %`,
       inline: true,
     },
     {
-      name: `${server.name} USO DE RAM`,
+      name: t("machine.ram-usage", {
+        machine_name: server.name,
+      }),
       value: verboseCurrentRamUsage,
       inline: true,
     },
     {
-      name: `${server.name} USO DE DISCO`,
+      name: t("machine.disk-usage", {
+        machine_name: server.name,
+      }),
       value: verboseCurrentDiskUsage,
       inline: true,
     },

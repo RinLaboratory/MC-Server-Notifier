@@ -2,6 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import type { TServerResponse } from "~/utils/validators";
 import { arrangeServers } from "../minecraft/arrange-servers";
 import { messageStore } from "~/store/message-store";
+import { t } from "~/utils/translations";
 
 interface EditMessageProps {
   serverResponse: TServerResponse[];
@@ -24,11 +25,11 @@ export default async function editMessage({
 
     const embededMessage = new EmbedBuilder()
       .setColor(15258703)
-      .setTitle("Server Status")
-      .setDescription("Servidores bajo observación")
+      .setTitle(t("embed.title"))
+      .setDescription(t("embed.description"))
       .addFields(messageField.flat())
       .setTimestamp()
-      .setFooter({ text: "Última Actualización" });
+      .setFooter({ text: t("embed.footer") });
 
     await sentEmbededMessage.edit({ embeds: [embededMessage] });
   }
