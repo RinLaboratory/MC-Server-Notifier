@@ -1,25 +1,17 @@
 import { EmbedBuilder } from "discord.js";
-import type { APIEmbedField, Client } from "discord.js";
 import type { TServerResponse } from "~/utils/validators";
-import { arrangeServers } from "./arrange-servers";
+import { arrangeServers } from "../minecraft/arrange-servers";
 import { messageStore } from "~/store/message-store";
 
 interface EditMessageProps {
   serverResponse: TServerResponse[];
-  arrangedServers: APIEmbedField[][];
-  client: Client<boolean>;
 }
 
 export default async function editMessage({
-  arrangedServers,
-  client,
   serverResponse,
 }: EditMessageProps) {
   const { sentEmbededMessages } = messageStore.getState();
-
   const _arrangedServers = await arrangeServers({
-    arrangedServers,
-    client,
     serverResponse,
   });
 
