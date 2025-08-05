@@ -1,34 +1,34 @@
-import type { APIEmbedField, Client } from "discord.js";
 import { getMachineStatus } from "~/machine/machine-status";
 import type { TServerResponse } from "~/utils/validators";
 import serverStatus from "./server-status";
 import { messageStore } from "~/store/message-store";
 import { groupServers } from "./group-servers";
+import { clientStore } from "~/store/client-store";
+import logger from "~/utils/logger";
+import type { APIEmbedField } from "discord.js";
 
-interface BaseArrangementProps {
-  arrangedServers: APIEmbedField[][];
-  client: Client<boolean>;
-}
-interface UpdateArrangementProps extends BaseArrangementProps {
+interface UpdateArrangementProps {
   serverResponse: TServerResponse[];
 }
 
 export async function arrangeServers({
-  arrangedServers,
-  client,
   serverResponse,
 }: UpdateArrangementProps) {
-  arrangedServers.length = 0;
+  const { client } = clientStore.getState();
+  const arrangedServers: APIEmbedField[][] = [];
+
+  if (!client) {
+    return logger.fatal("client has not been initialized");
+  }
+
   for (const { server, response } of serverResponse) {
     if (server.isMachine) {
       const ServerInfo = await getMachineStatus({
-        client,
         server,
       });
       arrangedServers.push(ServerInfo);
     } else {
       const ServerInfo = await serverStatus({
-        client,
         server,
         serverResponse: response,
       });

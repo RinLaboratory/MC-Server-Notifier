@@ -4,8 +4,9 @@ import { parse as yamlParse } from "yaml";
 import { YamlConfigSchema } from "./validators";
 import { parseMentionUsers } from "./parse-mention-users";
 import { discordStore } from "~/store/discord-store";
+import { serverStore } from "~/store/server-store";
 
-export default async function loadYaml() {
+export default async function loadConfigYaml() {
   const fileRoute = path.join(import.meta.dirname, "..", "config.yaml");
   const loadedFile = await fs.readFile(fileRoute, { encoding: "utf8" });
 
@@ -13,5 +14,5 @@ export default async function loadYaml() {
   discordStore.setState({ ...file.discordConfig });
   parseMentionUsers(file.discordConfig.mentionUsers);
 
-  return file.servers;
+  serverStore.setState({ servers: file.servers });
 }

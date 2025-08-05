@@ -1,5 +1,4 @@
-import type { Client } from "discord.js";
-import mentionPeople from "~/discord/mention-user";
+import mentionUsers from "~/discord/mention-user";
 import {
   getCurrentMachineInfo,
   getOtherMachineInfo,
@@ -8,13 +7,11 @@ import { validateLocalhostIp } from "~/utils/validate-localhost-ip";
 import type { TServer, TSystemStatus } from "~/utils/validators";
 
 interface GetCurrentMachineStatusProps {
-  client: Client<boolean>;
   server: TServer;
 }
 
 export async function getMachineStatus({
   server,
-  client,
 }: GetCurrentMachineStatusProps) {
   let machine: TSystemStatus | undefined;
 
@@ -56,7 +53,7 @@ export async function getMachineStatus({
   ];
 
   if (!isStatusAcceptable) {
-    await mentionPeople({ client, server });
+    await mentionUsers({ server });
   }
 
   return currentMachineData;

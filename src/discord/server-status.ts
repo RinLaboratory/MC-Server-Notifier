@@ -1,22 +1,19 @@
-import mentionPeople from "./mention-user";
-import type { Client } from "discord.js";
+import mentionUsers from "./mention-user";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import { messageStore } from "~/store/message-store";
 import type { TServer } from "~/utils/validators";
 
 interface ServerStatusProps {
   serverResponse: Partial<JavaStatusLegacyResponse>;
-  client: Client<boolean>;
   server: TServer;
 }
 
 export default async function serverStatus({
   serverResponse,
-  client,
   server,
 }: ServerStatusProps) {
   if (serverResponse.version?.name === "Unknown - Offline") {
-    await mentionPeople({ client, server });
+    await mentionUsers({ server });
 
     const message = {
       serverName: server.name,
