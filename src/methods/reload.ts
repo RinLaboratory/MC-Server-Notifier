@@ -1,6 +1,6 @@
 import { MessageFlags } from "discord.js";
 import type { BaseInteraction } from "discord.js";
-import loadConfigYaml from "~/utils/load-yaml";
+import loadConfigYaml from "~/utils/load-config-yaml";
 import logger from "~/utils/logger";
 
 export async function reload(interaction: BaseInteraction) {

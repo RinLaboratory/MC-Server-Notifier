@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { fetchServer } from "./utils/fetch-server";
-import loadConfigYaml from "./utils/load-yaml";
+import loadConfigYaml from "./utils/load-config-yaml";
 import { initializeDiscordBot } from "./discord/initalize-bot";
 import editMessage from "./discord/edit-message";
 import type { TServerResponse } from "./utils/validators";
