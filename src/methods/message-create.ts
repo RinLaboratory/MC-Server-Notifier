@@ -17,7 +17,6 @@ export function onCreateMessage(message: Message) {
       message.embeds.length !== 0 &&
       !sentEmbededMessages.find((sentMessage) => sentMessage.id === message.id)
     ) {
-      console.log("embed enviado");
       sentEmbededMessages.push(message);
       messageStore.setState({ sentEmbededMessages });
     }
