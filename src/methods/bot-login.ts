@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 import type { TextChannel } from "discord.js";
-import { arrangeServers } from "~/discord/arrange-servers";
+import { arrangeServers } from "~/minecraft/arrange-servers";
 import { clientStore } from "~/store/client-store";
 import { discordStore } from "~/store/discord-store";
 import { serverStore } from "~/store/server-store";

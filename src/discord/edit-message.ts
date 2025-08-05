@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 import type { TServerResponse } from "~/utils/validators";
-import { arrangeServers } from "./arrange-servers";
+import { arrangeServers } from "../minecraft/arrange-servers";
 import { messageStore } from "~/store/message-store";
 
 interface EditMessageProps {

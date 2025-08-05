@@ -1,4 +1,4 @@
-import mentionUsers from "./mention-user";
+import mentionUsers from "../discord/mention-user";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import { messageStore } from "~/store/message-store";
 import type { TServer } from "~/utils/validators";
