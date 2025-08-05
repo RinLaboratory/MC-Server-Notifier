@@ -53,7 +53,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           value: t("server.first-column.bottom", {
             server_name: server.name,
@@ -67,7 +67,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           inline: true,
         },
@@ -84,7 +84,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           value: t("server.middle-column.bottom", {
             server_name: server.name,
@@ -98,7 +98,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           inline: true,
         },
@@ -115,7 +115,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           value: t("server.last-column.bottom", {
             server_name: server.name,
@@ -129,7 +129,7 @@ export async function arrangeServers({
             max_player_count: response.players?.max ?? 0,
             last_available: lastMentionedServer
               ? `<t:${lastMentionedServer.timestamp}:R>`
-              : t("server.last-fetch.Nunca"),
+              : t("server.last-fetch.never"),
           }),
           inline: true,
         },
