@@ -39,8 +39,8 @@ export async function getMachineStatus({
 
   const currentMachineData = [
     {
-      name: `${server.name} CPU LOAD`,
-      value: `${machine?.load.toFixed(1)}`,
+      name: `${server.name} USO DE CPU`,
+      value: `${machine?.load.toFixed(1)} %`,
       inline: true,
     },
     {
