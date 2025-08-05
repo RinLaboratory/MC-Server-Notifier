@@ -15,24 +15,29 @@ export default async function editMessage({
   client,
   serverResponse,
 }: EditMessageProps) {
-  const { lastEmbedMessage } = messageStore.getState();
+  const { sentEmbededMessages } = messageStore.getState();
 
-  if (lastEmbedMessage) {
-    const _arrangedServers = await arrangeServers({
-      arrangedServers,
-      client,
-      serverResponse,
-    });
+  const _arrangedServers = await arrangeServers({
+    arrangedServers,
+    client,
+    serverResponse,
+  });
 
-    // CREAR MENSAJE
+  for (const [index, sentEmbededMessage] of sentEmbededMessages.entries()) {
+    const messageField = _arrangedServers[index];
+    if (!messageField)
+      return console.warn(
+        "encountered a message that was sent but no server is being displayed",
+      );
+
     const embededMessage = new EmbedBuilder()
       .setColor(15258703)
       .setTitle("Server Status")
       .setDescription("Servidores bajo observación")
-      .addFields(_arrangedServers.flat())
+      .addFields(messageField.flat())
       .setTimestamp()
       .setFooter({ text: "Última Actualización" });
 
-    await lastEmbedMessage.edit({ embeds: [embededMessage] });
+    await sentEmbededMessage.edit({ embeds: [embededMessage] });
   }
 }

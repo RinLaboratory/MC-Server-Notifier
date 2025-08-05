@@ -3,6 +3,7 @@ import { getMachineStatus } from "~/machine/machine-status";
 import type { TServerResponse } from "~/utils/validators";
 import serverStatus from "./server-status";
 import { messageStore } from "~/store/message-store";
+import { groupServers } from "./group-servers";
 
 interface BaseArrangementProps {
   arrangedServers: APIEmbedField[][];
@@ -58,5 +59,5 @@ export async function arrangeServers({
       ]);
     }
   }
-  return arrangedServers;
+  return groupServers(arrangedServers);
 }

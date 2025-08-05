@@ -1,14 +1,14 @@
 import type { Message } from "discord.js";
 
 interface State {
-  lastEmbedMessage: Message | undefined;
+  sentEmbededMessages: Message[];
   lastMentionMessage: Message | undefined;
   mentionReason: string[];
   memorizedLastMentionTimestamp: { serverName: string; timestamp: number }[];
 }
 
 let state: State = {
-  lastEmbedMessage: undefined,
+  sentEmbededMessages: [],
   lastMentionMessage: undefined,
   mentionReason: [],
   memorizedLastMentionTimestamp: [],

@@ -19,6 +19,8 @@ export default async function createApp() {
     const { DISCORD_BOT_CHANNEL_ID, DISCORD_BOT_CLIENT_ID } =
       discordStore.getState();
 
+    const { sentEmbededMessages } = messageStore.getState();
+
     if (
       message.channelId === DISCORD_BOT_CHANNEL_ID &&
       message.author.id === DISCORD_BOT_CLIENT_ID
@@ -26,8 +28,14 @@ export default async function createApp() {
       if (message.mentions.users.toJSON().length !== 0) {
         messageStore.setState({ lastMentionMessage: message });
       }
-      if (message.embeds.length !== 0) {
-        messageStore.setState({ lastEmbedMessage: message });
+      if (
+        message.embeds.length !== 0 &&
+        !sentEmbededMessages.find(
+          (sentMessage) => sentMessage.id === message.id,
+        )
+      ) {
+        sentEmbededMessages.push(message);
+        messageStore.setState({ sentEmbededMessages });
       }
     }
   });

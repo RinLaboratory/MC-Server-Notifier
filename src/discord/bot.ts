@@ -55,22 +55,24 @@ export async function discordBot({ servers }: DiscordBotProps) {
       serverResponse.push(await fetchServer(server));
     }
 
-    await arrangeServers({
+    const _arrangedServers = await arrangeServers({
       arrangedServers,
       client,
       serverResponse,
     });
 
-    // CREAR MENSAJE
-    const embededMessage = new EmbedBuilder()
-      .setColor(15258703)
-      .setTitle("Server Status")
-      .setDescription("Servidores bajo observación")
-      .addFields(arrangedServers.flat())
-      .setTimestamp()
-      .setFooter({ text: "Última Actualización" });
-    // ENVIAR EL MENSAJE
-    await targetChannel.send({ embeds: [embededMessage] });
+    for (const messageField of _arrangedServers) {
+      // CREAR MENSAJE
+      const embededMessage = new EmbedBuilder()
+        .setColor(15258703)
+        .setTitle("Server Status")
+        .setDescription("Servidores bajo observación")
+        .addFields(messageField.flat())
+        .setTimestamp()
+        .setFooter({ text: "Última Actualización" });
+      // ENVIAR EL MENSAJE
+      await targetChannel.send({ embeds: [embededMessage] });
+    }
   });
 
   return {
