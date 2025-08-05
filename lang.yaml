@@ -1,0 +1,50 @@
+# default lang: ES (spanish)
+# In the server key you can customize the contents of the first-column,
+# middle-column and last-column however you like.
+#
+# this is the format that placeholders must have: {{placeholder}}
+# these are all the possible variables you can show:
+#
+# server_name: server name
+# server_status: current server status
+# server_runtime: server version name
+# server_url: server url
+# server_ip: server ip
+# server_port: server port
+# version_protocol: server version protocol
+# player_count: server player count
+# max_player_count: server max player slots
+# last_available: a timestamp of the last time the server was available
+#
+
+lang:
+  commands:
+    reload:
+      reply: "Configuración recargada exitosamente"
+      description: "Recarga la configuración"
+    error: "Ha ocurrido un error al ejecutar este comando"
+  embed:
+    title: "Server Status"
+    description: "Servidores bajo observación"
+    footer: "Última Actualización"
+  server:
+    first-column:
+      top: "{{server_name}}"
+      bottom: "{{server_status}}"
+    middle-column:
+      top: "{{server_runtime}}"
+      bottom: "{{server_url}}"
+    last-column:
+      top: "Ult. Aviso"
+      bottom: "{{last_available}}"
+    status:
+      offline: " ⚠️ Fuera de línea"
+      online: "  🟢 En línea"
+    last-fetch:
+      never: "Nunca"
+  machine:
+    cpu-usage: "{{machine_name}} USO DE CPU"
+    ram-usage: "{{machine_name}} USO DE RAM"
+    disk-usage: "{{machine_name}} USO DE DISCO"
+  perms:
+    missing-perms: "No tienes permisos"

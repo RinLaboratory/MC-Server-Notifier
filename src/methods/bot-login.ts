@@ -6,6 +6,7 @@ import { discordStore } from "~/store/discord-store";
 import { serverStore } from "~/store/server-store";
 import { fetchServer } from "~/utils/fetch-server";
 import logger from "~/utils/logger";
+import { t } from "~/utils/translations";
 import type { TServerResponse } from "~/utils/validators";
 
 export async function onBotLogin() {
@@ -50,11 +51,11 @@ export async function onBotLogin() {
     // CREAR MENSAJE
     const embededMessage = new EmbedBuilder()
       .setColor(15258703)
-      .setTitle("Server Status")
-      .setDescription("Servidores bajo observación")
+      .setTitle(t("embed.title"))
+      .setDescription(t("embed.description"))
       .addFields(messageField.flat())
       .setTimestamp()
-      .setFooter({ text: "Última Actualización" });
+      .setFooter({ text: t("embed.footer") });
     // ENVIAR EL MENSAJE
     await targetChannel.send({ embeds: [embededMessage] });
   }

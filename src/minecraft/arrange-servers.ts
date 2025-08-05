@@ -6,6 +6,7 @@ import { groupServers } from "./group-servers";
 import { clientStore } from "~/store/client-store";
 import logger from "~/utils/logger";
 import type { APIEmbedField } from "discord.js";
+import { t } from "~/utils/translations";
 
 interface UpdateArrangementProps {
   serverResponse: TServerResponse[];
@@ -40,20 +41,96 @@ export async function arrangeServers({
 
       arrangedServers.push([
         {
-          name: server.name,
-          value: ServerInfo,
+          name: t("server.first-column.top", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
+          value: t("server.first-column.bottom", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
           inline: true,
         },
         {
-          name: response.version?.name ?? "",
-          value: server.config.serverURL,
+          name: t("server.middle-column.top", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
+          value: t("server.middle-column.bottom", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
           inline: true,
         },
         {
-          name: "Ult. Aviso",
-          value: lastMentionedServer
-            ? `<t:${lastMentionedServer.timestamp}:R>`
-            : "Nunca",
+          name: t("server.last-column.top", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
+          value: t("server.last-column.bottom", {
+            server_name: server.name,
+            server_status: ServerInfo,
+            server_runtime: response.version?.name ?? "",
+            server_url: server.config.serverURL,
+            server_ip: server.config.serverIP,
+            server_port: server.config.serverPort,
+            version_protocol: response.version?.protocol ?? 0,
+            player_count: response.players?.online ?? 0,
+            max_player_count: response.players?.max ?? 0,
+            last_available: lastMentionedServer
+              ? `<t:${lastMentionedServer.timestamp}:R>`
+              : t("server.last-fetch.Nunca"),
+          }),
           inline: true,
         },
       ]);

@@ -1,5 +1,6 @@
 import { MessageFlags } from "discord.js";
 import type { BaseInteraction, GuildMember } from "discord.js";
+import { t } from "~/utils/translations";
 
 type NextFunction = () => Promise<void> | void;
 
@@ -11,7 +12,7 @@ export default async function checkUserPermissions(
   if (!member.permissions.has("Administrator")) {
     if (interaction.isRepliable()) {
       await interaction.reply({
-        content: "You dont have permission",
+        content: t("perms.missing-perms"),
         flags: MessageFlags.Ephemeral,
       });
     }

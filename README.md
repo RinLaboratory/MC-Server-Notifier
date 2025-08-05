@@ -141,6 +141,7 @@ When you have compiled the project, you have to compress the project folder into
 - `node_modules`: everything inside
 - `package.json`
 - `config.yaml`
+- `lang.yaml`
 
 Once that is done, your startup command is the following `node dist/index.mjs`.
 

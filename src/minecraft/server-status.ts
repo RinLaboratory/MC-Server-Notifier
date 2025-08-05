@@ -1,6 +1,7 @@
 import mentionUsers from "../discord/mention-user";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import { messageStore } from "~/store/message-store";
+import { t } from "~/utils/translations";
 import type { TServer } from "~/utils/validators";
 
 interface ServerStatusProps {
@@ -35,7 +36,7 @@ export default async function serverStatus({
 
     messageStore.setState({ memorizedLastMentionTimestamp });
 
-    return " ⚠️ Fuera de línea";
+    return t("server.status.offline");
   } else {
     const { lastMentionMessage, mentionReason } = messageStore.getState();
     if (mentionReason.find((value) => value === server.name)) {
@@ -49,6 +50,6 @@ export default async function serverStatus({
       await lastMentionMessage.delete();
       messageStore.setState({ lastMentionMessage: undefined });
     }
-    return "  🟢 En línea";
+    return t("server.status.online");
   }
 }

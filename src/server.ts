@@ -5,9 +5,11 @@ import { initializeDiscordBot } from "./discord/initalize-bot";
 import editMessage from "./discord/edit-message";
 import type { TServerResponse } from "./utils/validators";
 import { serverStore } from "./store/server-store";
+import loadLangYaml from "./utils/load-lang-yaml";
 
 export default async function createApp() {
   await loadConfigYaml();
+  await loadLangYaml();
   await initializeDiscordBot();
 
   const interval = 15000; // 15 segundos

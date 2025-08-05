@@ -1,5 +1,7 @@
 import { MessageFlags } from "discord.js";
 import type { BaseInteraction } from "discord.js";
+import logger from "~/utils/logger";
+import { t } from "~/utils/translations";
 
 export async function onCommandInteraction(interaction: BaseInteraction) {
   if (!interaction.isChatInputCommand()) return;
@@ -7,22 +9,25 @@ export async function onCommandInteraction(interaction: BaseInteraction) {
   const command = interaction.client.commands.get(interaction.commandName);
 
   if (!command) {
-    console.error(`No command matching ${interaction.commandName} was found.`);
+    logger.error(
+      `No command matching ${interaction.commandName} was found.`,
+      undefined,
+    );
     return;
   }
 
   try {
     await command.execute(interaction);
   } catch (error) {
-    console.error(error);
+    logger.error("", error);
     if (interaction.replied || interaction.deferred) {
       await interaction.followUp({
-        content: "There was an error while executing this command!",
+        content: t("commands.error"),
         flags: MessageFlags.Ephemeral,
       });
     } else {
       await interaction.reply({
-        content: "There was an error while executing this command!",
+        content: t("commands.error"),
         flags: MessageFlags.Ephemeral,
       });
     }
