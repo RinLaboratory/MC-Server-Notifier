@@ -1,4 +1,4 @@
-import { store } from "~/store/shared-store";
+import { discordStore } from "~/store/discord-store";
 
 export function parseMentionUsers(users: string[]) {
   const _users: string[] = [];
@@ -6,5 +6,5 @@ export function parseMentionUsers(users: string[]) {
     _users.push(`<@${userId}>`);
   }
 
-  store.setState({ userMentions: _users });
+  discordStore.setState({ mentionUsers: _users });
 }

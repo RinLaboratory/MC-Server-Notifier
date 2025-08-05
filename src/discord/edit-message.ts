@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import type { APIEmbedField, Client } from "discord.js";
 import type { TServerResponse } from "~/utils/validators";
 import { arrangeServers } from "./arrange-servers";
-import { store } from "~/store/shared-store";
+import { messageStore } from "~/store/message-store";
 
 interface EditMessageProps {
   serverResponse: TServerResponse[];
@@ -15,7 +15,7 @@ export default async function editMessage({
   client,
   serverResponse,
 }: EditMessageProps) {
-  const { lastEmbedMessage } = store.getState();
+  const { lastEmbedMessage } = messageStore.getState();
 
   if (lastEmbedMessage) {
     const _arrangedServers = await arrangeServers({

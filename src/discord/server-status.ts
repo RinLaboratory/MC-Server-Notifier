@@ -1,7 +1,7 @@
 import mentionPeople from "./mention-user";
 import type { Client } from "discord.js";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
-import { store } from "~/store/shared-store";
+import { messageStore } from "~/store/message-store";
 import type { TServer } from "~/utils/validators";
 
 interface ServerStatusProps {
@@ -23,7 +23,7 @@ export default async function serverStatus({
       timestamp: Math.floor(new Date().valueOf() / 1000),
     };
 
-    const { memorizedLastMentionTimestamp } = store.getState();
+    const { memorizedLastMentionTimestamp } = messageStore.getState();
     const index = memorizedLastMentionTimestamp.findIndex(
       (value) => value.serverName === server.name,
     );
@@ -36,21 +36,21 @@ export default async function serverStatus({
       memorizedLastMentionTimestamp.push(message);
     }
 
-    store.setState({ memorizedLastMentionTimestamp });
+    messageStore.setState({ memorizedLastMentionTimestamp });
 
     return " ⚠️ Fuera de línea";
   } else {
-    const { lastMentionMessage, mentionReason } = store.getState();
+    const { lastMentionMessage, mentionReason } = messageStore.getState();
     if (mentionReason.find((value) => value === server.name)) {
       const index = mentionReason.indexOf(server.name);
       mentionReason.splice(index, 1);
     }
 
-    store.setState({ mentionReason });
+    messageStore.setState({ mentionReason });
 
     if (lastMentionMessage && mentionReason.length === 0) {
       await lastMentionMessage.delete();
-      store.setState({ lastMentionMessage: undefined });
+      messageStore.setState({ lastMentionMessage: undefined });
     }
     return "  🟢 En línea";
   }

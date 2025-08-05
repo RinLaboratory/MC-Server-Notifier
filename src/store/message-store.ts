@@ -5,9 +5,6 @@ interface State {
   lastMentionMessage: Message | undefined;
   mentionReason: string[];
   memorizedLastMentionTimestamp: { serverName: string; timestamp: number }[];
-  channelId: string | undefined;
-  userMentions: string[];
-  DISCORD_BOT_TOKEN: string;
 }
 
 let state: State = {
@@ -15,12 +12,9 @@ let state: State = {
   lastMentionMessage: undefined,
   mentionReason: [],
   memorizedLastMentionTimestamp: [],
-  channelId: undefined,
-  userMentions: [],
-  DISCORD_BOT_TOKEN: "",
 };
 
-export const store = {
+export const messageStore = {
   getState: () => state,
   setState: (partial: Partial<State>) => {
     state = { ...state, ...partial };
