@@ -14,6 +14,7 @@ This node server uses Discord WebHook to work.
   - [Understanding `.env` file](#understanding-env-file)
 - [Getting the development server running](#getting-the-development-server-running)
 - [Getting the production server running](#getting-the-production-server-running)
+- [Setting up server in pterodactyl](#setting-up-server-in-pterodactyl)
 - [Learn More](#learn-more)
 
 ## Getting dependencies installed
@@ -57,12 +58,23 @@ discordConfig:
   mentionUsers:
     - "000000000000000000" # The user id's that this bot will mention if something goes wrong
 servers:
-  - name: "Auth" # Server name
-    isMachine: true # whether this is a machine or a minecraft server
+  - name: "Proxy" # Server name
     config:
       - serverIP: "127.0.0.1" # Server ip
       - serverPort: 25565, # Server port
       - serverURL: "https://yourServerURLhere.com" # If you have a web server like pterodactyl, paste the url here and it will display it as part of the message for easy access
+  - name: "localhost"
+    isMachine: true # whether this is a machine or a minecraft server, if this is a machine, it will display its CPU, RAM and DISK USAGE
+    config:
+      serverIP: "127.0.0.1" # Server ip, since this is localhost, 127.x.x.x, 172.x.x.x, 0.x.x.x will be detected as localhost
+      serverPort: 1 # since this is localhost, this value really doesnt matter but it has to be a valid port number
+      serverURL: "https://yourServerURLhere.com"
+  - name: "other-server-node"
+    isMachine: true # whether this is a machine or a minecraft server, if this is a machine, it will display its CPU, RAM and DISK USAGE
+    config:
+      serverIP: "192.168.0.1" # Server ip, since this is other machine, it will fetch data there.
+      serverPort: 8000
+      serverURL: "https://yourServerURLhere.com"
 ```
 
 TIP: I **do not recommend** to monitor a **BungeeCord (waterfall, velocity, whatever...)** server because it has a **high false-positive rate**.
@@ -102,6 +114,37 @@ Once finished compiling, you will use the following command to run the productio
 ```bash
 pnpm start
 ```
+
+## Setting up server in pterodactyl
+
+Its very tricky to get a node server running in pterodactyl, specially if typescript is involved.
+
+I used this egg to get it running: [NodeJS-Universal](https://github.com/YajTPG/pterodactyl-eggs/blob/universal/egg-node-j-s--universal.json) from YajTPG (i know it's outdated)
+
+Inside the docker images located in the egg's config i added this one to get Node v22 `ghcr.io/zastinian/esdock:nodejs_22`, BEWARE: you will have to modify the start configuration message for the panel to detect that the app is running:
+
+- Start Configuration
+- ```json
+  {
+    "done": "app is successfully online",
+    "userInteraction": []
+  }
+  ```
+
+You will have to manually compile the app in your computer since installing dependencies with pterodactyl will throw EOENT errors when trying to resolve packages like `typescript`, `eslint` and `pnpm`.
+
+When you have compiled the project, you have to compress the project folder into `zip`, `rar`, `tar.gz`, whichever format suits you better. Make sure to include these folders and files (!important):
+
+- `.cache`
+- `dist`
+  - `index.mjs`
+- `node_modules`: everything inside
+- `package.json`
+- `config.yaml`
+
+Once that is done, your startup command is the following `node dist/index.mjs`.
+
+If you want to update `config.yml`, you DONT have to recompile the entire project again to apply changes, just restart the app and that's it!
 
 ## Learn More
 
