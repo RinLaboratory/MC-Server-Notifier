@@ -4,6 +4,7 @@ import {
   getCurrentMachineInfo,
   getOtherMachineInfo,
 } from "~/utils/get-machine-info";
+import { validateLocalhostIp } from "~/utils/validate-localhost-ip";
 import type { TServer, TSystemStatus } from "~/utils/validators";
 
 interface GetCurrentMachineStatusProps {
@@ -17,7 +18,7 @@ export async function getMachineStatus({
 }: GetCurrentMachineStatusProps) {
   let machine: TSystemStatus | undefined;
 
-  if (server.name === "localhost") {
+  if (validateLocalhostIp(server.config.serverIP)) {
     machine = await getCurrentMachineInfo();
   } else {
     machine = await getOtherMachineInfo(server);
@@ -38,17 +39,17 @@ export async function getMachineStatus({
 
   const currentMachineData = [
     {
-      name: "D1 CPU LOAD",
+      name: `${server.name} CPU LOAD`,
       value: `${machine?.load.toFixed(1)}`,
       inline: true,
     },
     {
-      name: "D1 USO DE RAM",
+      name: `${server.name} USO DE RAM`,
       value: verboseCurrentRamUsage,
       inline: true,
     },
     {
-      name: "D1 USO DE DISCO",
+      name: `${server.name} USO DE DISCO`,
       value: verboseCurrentDiskUsage,
       inline: true,
     },
