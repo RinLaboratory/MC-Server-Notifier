@@ -4,27 +4,38 @@ import loadYaml from "./utils/load-yaml";
 import { discordBot } from "./discord/bot";
 import editMessage from "./discord/edit-message";
 import type { TServerResponse } from "./utils/validators";
-import { store } from "./store/shared-store";
+import { discordStore } from "./store/discord-store";
+import { messageStore } from "./store/message-store";
 
 export default async function createApp() {
-  const file = await loadYaml();
-  const { servers, discordConfig } = file;
+  const servers = await loadYaml();
 
   const { client, arrangedServers } = await discordBot({
-    file,
+    servers,
   });
 
   client.on("messageCreate", (message) => {
     // EL ULTIMO MENSAJE ENVIADO PERTENECE AL BOT EN EL CANAL DESIGNADO
+    const { DISCORD_BOT_CHANNEL_ID, DISCORD_BOT_CLIENT_ID } =
+      discordStore.getState();
+
+    const { sentEmbededMessages } = messageStore.getState();
+
     if (
-      message.channelId === discordConfig.DISCORD_BOT_CHANNEL_ID &&
-      message.author.id === discordConfig.DISCORD_BOT_CLIENT_ID
+      message.channelId === DISCORD_BOT_CHANNEL_ID &&
+      message.author.id === DISCORD_BOT_CLIENT_ID
     ) {
       if (message.mentions.users.toJSON().length !== 0) {
-        store.setState({ lastMentionMessage: message });
+        messageStore.setState({ lastMentionMessage: message });
       }
-      if (message.embeds.length !== 0) {
-        store.setState({ lastEmbedMessage: message });
+      if (
+        message.embeds.length !== 0 &&
+        !sentEmbededMessages.find(
+          (sentMessage) => sentMessage.id === message.id,
+        )
+      ) {
+        sentEmbededMessages.push(message);
+        messageStore.setState({ sentEmbededMessages });
       }
     }
   });

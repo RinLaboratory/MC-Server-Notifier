@@ -14,10 +14,16 @@
 #       - serverPort: 25565, # Server port
 #       - serverURL: "https://yourServerURLhere.com" # If you have a web server like pterodactyl, paste the url here and it will display it as part of the message for easy access
 #   - name: "localhost"
-#     isMachine: true # whether this is a machine or a minecraft server
+#     isMachine: true # whether this is a machine or a minecraft server, if this is a machine, it will display its CPU, RAM and DISK USAGE
 #     config:
-#       serverIP: "127.0.0.1"
-#       serverPort: 1
+#       serverIP: "127.0.0.1" # Server ip, since this is localhost, 127.x.x.x, 172.x.x.x, 0.x.x.x will be detected as localhost
+#       serverPort: 1 # since this is localhost, this value really doesnt matter but it has to be a valid port number
+#       serverURL: "https://yourServerURLhere.com"
+#   - name: "other-server-node"
+#     isMachine: true # whether this is a machine or a minecraft server, if this is a machine, it will display its CPU, RAM and DISK USAGE
+#     config:
+#       serverIP: "192.168.0.1" # Server ip, since this is other machine, it will fetch data there.
+#       serverPort: 8000
 #       serverURL: "https://yourServerURLhere.com"
 
 discordConfig:
@@ -34,6 +40,12 @@ servers:
     config:
       serverIP: "127.0.0.1"
       serverPort: 1
+      serverURL: "https://yourServerURLhere.com"
+  - name: "other-server-node"
+    isMachine: true
+    config:
+      serverIP: "192.168.0.1"
+      serverPort: 8000
       serverURL: "https://yourServerURLhere.com"
   - name: "Auth"
     config:

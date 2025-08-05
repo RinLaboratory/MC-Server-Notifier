@@ -1,26 +1,20 @@
 import type { Message } from "discord.js";
 
 interface State {
-  lastEmbedMessage: Message | undefined;
+  sentEmbededMessages: Message[];
   lastMentionMessage: Message | undefined;
   mentionReason: string[];
   memorizedLastMentionTimestamp: { serverName: string; timestamp: number }[];
-  channelId: string | undefined;
-  userMentions: string[];
-  DISCORD_BOT_TOKEN: string;
 }
 
 let state: State = {
-  lastEmbedMessage: undefined,
+  sentEmbededMessages: [],
   lastMentionMessage: undefined,
   mentionReason: [],
   memorizedLastMentionTimestamp: [],
-  channelId: undefined,
-  userMentions: [],
-  DISCORD_BOT_TOKEN: "",
 };
 
-export const store = {
+export const messageStore = {
   getState: () => state,
   setState: (partial: Partial<State>) => {
     state = { ...state, ...partial };
