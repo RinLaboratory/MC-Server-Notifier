@@ -3,7 +3,6 @@ import { discordStore } from "~/store/discord-store";
 import { messageStore } from "~/store/message-store";
 
 export function onCreateMessage(message: Message) {
-  // EL ULTIMO MENSAJE ENVIADO PERTENECE AL BOT EN EL CANAL DESIGNADO
   const { DISCORD_BOT_CHANNEL_ID, DISCORD_BOT_CLIENT_ID } =
     discordStore.getState();
 

@@ -19,23 +19,18 @@ export async function onBotLogin() {
     return logger.fatal("client has not been initialized");
   }
 
-  console.log(`Logged in as ${client.user?.tag}!`);
-
-  // OBTENER SERVIDOR ACTUAL
   const guild = client.guilds.cache.get(DISCORD_BOT_GUILD_ID);
   if (!guild) return logger.fatal("server not found");
 
-  // OBTENER CANAL DESIGNADO
   const targetChannel = guild.channels.cache.get(DISCORD_BOT_CHANNEL_ID) as
     | TextChannel
     | undefined;
   if (!targetChannel) return logger.fatal("channel not found");
 
   try {
-    // BORRAR TODOS LOS MENSAJES DEL CANAL
     await targetChannel.bulkDelete(100);
   } catch (error) {
-    logger.error("Error al borrar mensajes:", error);
+    logger.error("error when trying to prune channel messages", error);
   }
 
   const serverResponse: TServerResponse[] = [];
@@ -48,7 +43,6 @@ export async function onBotLogin() {
   });
 
   for (const messageField of _arrangedServers) {
-    // CREAR MENSAJE
     const embededMessage = new EmbedBuilder()
       .setColor(15258703)
       .setTitle(t("embed.title"))
@@ -56,7 +50,6 @@ export async function onBotLogin() {
       .addFields(messageField.flat())
       .setTimestamp()
       .setFooter({ text: t("embed.footer") });
-    // ENVIAR EL MENSAJE
     await targetChannel.send({ embeds: [embededMessage] });
   }
 }

@@ -7,7 +7,7 @@ export function t(
   const { loadedLanguage } = langStore.getState();
   if (!loadedLanguage) return key;
 
-  // Navegar por el objeto usando "a.b.c" como ruta
+  // Navigate object using "a.b.c" structure as route
   const text = key.split(".").reduce((obj, k) => {
     if (obj && typeof obj === "object" && k in obj) {
       return (obj as Record<string, unknown>)[k];
