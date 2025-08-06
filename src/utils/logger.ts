@@ -12,9 +12,13 @@ function warn(message: string) {
   }
 }
 
-function error(message: string, error: unknown) {
-  if (env.NODE_ENV === "development" && error instanceof Error) {
-    console.error(message, error.cause);
+function error(message: string, error?: unknown) {
+  if (env.NODE_ENV === "development") {
+    if (error instanceof Error) {
+      console.error(message, error.cause);
+    } else {
+      console.error(message);
+    }
   }
 }
 

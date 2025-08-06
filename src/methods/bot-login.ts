@@ -30,7 +30,7 @@ export async function onBotLogin() {
   try {
     await targetChannel.bulkDelete(100);
   } catch (error) {
-    logger.error("error when trying to prune channel messages:", error);
+    logger.error("error when trying to prune channel messages", error);
   }
 
   const serverResponse: TServerResponse[] = [];

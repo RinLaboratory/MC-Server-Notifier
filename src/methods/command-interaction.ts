@@ -9,17 +9,14 @@ export async function onCommandInteraction(interaction: BaseInteraction) {
   const command = interaction.client.commands.get(interaction.commandName);
 
   if (!command) {
-    logger.error(
-      `no command matching ${interaction.commandName} was found.`,
-      undefined,
-    );
+    logger.error(`no command matching ${interaction.commandName} was found`);
     return;
   }
 
   try {
     await command.execute(interaction);
   } catch (error) {
-    logger.error("", error);
+    logger.error("error while trying to execute a command", error);
     if (interaction.replied || interaction.deferred) {
       await interaction.followUp({
         content: t("commands.error"),
