@@ -20,10 +20,10 @@ export async function initializeDiscordBot() {
   const restClient = new REST({ version: "10" }).setToken(DISCORD_BOT_TOKEN);
 
   await client.login(DISCORD_BOT_TOKEN);
+  console.log(`Logged in as ${client.user?.tag}!`);
 
   clientStore.setState({ client });
 
   await controllersHandler();
-
   await registerCommands(restClient);
 }

@@ -10,7 +10,7 @@ export async function onCommandInteraction(interaction: BaseInteraction) {
 
   if (!command) {
     logger.error(
-      `No command matching ${interaction.commandName} was found.`,
+      `no command matching ${interaction.commandName} was found.`,
       undefined,
     );
     return;
