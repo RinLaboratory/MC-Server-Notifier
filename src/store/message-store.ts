@@ -2,6 +2,7 @@ import type { Message } from "discord.js";
 
 interface State {
   sentEmbededMessages: Message[];
+  hideServersURLs: boolean;
   lastMentionMessage: Message | undefined;
   mentionReason: string[];
   memorizedLastMentionTimestamp: { serverName: string; timestamp: number }[];
@@ -9,6 +10,7 @@ interface State {
 
 let state: State = {
   sentEmbededMessages: [],
+  hideServersURLs: false,
   lastMentionMessage: undefined,
   mentionReason: [],
   memorizedLastMentionTimestamp: [],

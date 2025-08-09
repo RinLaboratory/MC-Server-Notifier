@@ -22,6 +22,12 @@ lang:
     reload:
       reply: "Configuración recargada exitosamente"
       description: "Recarga la configuración"
+    toggle-servers-urls:
+      reply:
+        shown: "A partir de la próxima actualización se mostrarán las URLs de los servidores"
+        hidden: "A partir de la próxima actualización se esconderán las URLs de los servidores"
+      description: "Esconde o muestra las URLs de los servidores"
+      hidden: "(Oculto)"
     error: "Ha ocurrido un error al ejecutar este comando"
   embed:
     title: "Server Status"
