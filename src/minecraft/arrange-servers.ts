@@ -34,7 +34,8 @@ export async function arrangeServers({
         serverResponse: response,
       });
 
-      const { memorizedLastMentionTimestamp } = messageStore.getState();
+      const { memorizedLastMentionTimestamp, hideServersURLs } =
+        messageStore.getState();
       const lastMentionedServer = memorizedLastMentionTimestamp.find(
         (value) => value.serverName === server.name,
       );
@@ -43,7 +44,9 @@ export async function arrangeServers({
         server_name: server.name,
         server_status: ServerInfo,
         server_runtime: response.version?.name ?? "",
-        server_url: server.config.serverURL,
+        server_url: hideServersURLs
+          ? t("commands.toggle-servers-urls.hidden")
+          : server.config.serverURL,
         server_ip: server.config.serverIP,
         server_port: server.config.serverPort,
         version_protocol: response.version?.protocol ?? 0,
