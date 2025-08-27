@@ -1,4 +1,4 @@
-import type { TDiscordConfig } from "~/utils/validators";
+import type { TDiscordConfig } from "@validators";
 
 let state: TDiscordConfig = {
   DISCORD_BOT_CHANNEL_ID: "",

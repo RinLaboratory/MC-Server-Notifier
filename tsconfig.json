@@ -26,6 +26,12 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
+      "@controllers/*": ["./src/controllers/*"],
+      "@services/*": ["./src/services/*"],
+      "@middlewares": ["./src/middlewares"],
+      "@store": ["./src/store"],
+      "@utils/*": ["./src/utils/*"],
+      "@validators": ["./src/utils/validators"],
       "~/*": ["./src/*"]
     },
     "module": "esnext",

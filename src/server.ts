@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { initializeDiscordBot } from "./discord/initalize-bot";
-import { monitorServerTask } from "./minecraft/monitor-server-task";
+import { initializeDiscordBot } from "./controllers/handlers/initalize-bot";
 import loadConfigYaml from "./utils/load-config-yaml";
 import loadLangYaml from "./utils/load-lang-yaml";
+import { monitorServerTask } from "./utils/minecraft/monitor-server-task";
 
 export default async function createApp() {
   await loadConfigYaml();
