@@ -1,5 +1,6 @@
 import type { APIEmbedField } from "discord.js";
-import type { TServerResponse } from "~/utils/validators";
+import type { JavaStatusLegacyResponse } from "minecraft-server-util";
+import type { TServer, TServerResponse } from "~/utils/validators";
 import { httpStatus } from "~/machine/http-status";
 import { getMachineStatus } from "~/machine/machine-status";
 import { clientStore } from "~/store/client-store";
@@ -8,6 +9,64 @@ import logger from "~/utils/logger";
 import { t } from "~/utils/translations";
 import { groupServers } from "./group-servers";
 import serverStatus from "./server-status";
+
+interface HandleServerStatusProps {
+  server: TServer;
+  serverResponse: Partial<JavaStatusLegacyResponse>;
+  arrangedServers: APIEmbedField[][];
+}
+
+async function handleServerStatus({
+  arrangedServers,
+  server,
+  serverResponse,
+}: HandleServerStatusProps) {
+  const ServerInfo = await serverStatus({
+    server,
+    serverResponse,
+  });
+
+  const { memorizedLastMentionTimestamp, hideServersURLs } =
+    messageStore.getState();
+  const lastMentionedServer = memorizedLastMentionTimestamp.find(
+    (value) => value.serverName === server.name,
+  );
+
+  const placeholder_options = {
+    server_name: server.name,
+    server_status: ServerInfo,
+    server_runtime: serverResponse.version?.name ?? "",
+    server_url: hideServersURLs
+      ? t("commands.toggle-servers-urls.hidden")
+      : server.config.serverURL,
+    server_ip: server.config.serverIP,
+    server_port: server.config.serverPort,
+    version_protocol: serverResponse.version?.protocol ?? 0,
+    player_count: serverResponse.players?.online ?? 0,
+    max_player_count: serverResponse.players?.max ?? 0,
+    last_available: lastMentionedServer
+      ? `<t:${lastMentionedServer.timestamp}:R>`
+      : t("server.last-fetch.never"),
+  };
+
+  arrangedServers.push([
+    {
+      name: t("server.first-column.top", placeholder_options),
+      value: t("server.first-column.bottom", placeholder_options),
+      inline: true,
+    },
+    {
+      name: t("server.middle-column.top", placeholder_options),
+      value: t("server.middle-column.bottom", placeholder_options),
+      inline: true,
+    },
+    {
+      name: t("server.last-column.top", placeholder_options),
+      value: t("server.last-column.bottom", placeholder_options),
+      inline: true,
+    },
+  ]);
+}
 
 interface UpdateArrangementProps {
   serverResponse: TServerResponse[];
@@ -31,97 +90,17 @@ export async function arrangeServers({
       arrangedServers.push(ServerInfo);
     } else if (server.type === "http") {
       const httpServerResponse = await httpStatus(server);
-      const ServerInfo = await serverStatus({
+      await handleServerStatus({
         server,
+        arrangedServers,
         serverResponse: httpServerResponse,
       });
-
-      const { memorizedLastMentionTimestamp, hideServersURLs } =
-        messageStore.getState();
-      const lastMentionedServer = memorizedLastMentionTimestamp.find(
-        (value) => value.serverName === server.name,
-      );
-
-      const placeholder_options = {
-        server_name: server.name,
-        server_status: ServerInfo,
-        server_runtime: response.version?.name ?? "",
-        server_url: hideServersURLs
-          ? t("commands.toggle-servers-urls.hidden")
-          : server.config.serverURL,
-        server_ip: server.config.serverIP,
-        server_port: server.config.serverPort,
-        version_protocol: response.version?.protocol ?? 0,
-        player_count: response.players?.online ?? 0,
-        max_player_count: response.players?.max ?? 0,
-        last_available: lastMentionedServer
-          ? `<t:${lastMentionedServer.timestamp}:R>`
-          : t("server.last-fetch.never"),
-      };
-
-      arrangedServers.push([
-        {
-          name: t("server.first-column.top", placeholder_options),
-          value: t("server.first-column.bottom", placeholder_options),
-          inline: true,
-        },
-        {
-          name: t("server.middle-column.top", placeholder_options),
-          value: t("server.middle-column.bottom", placeholder_options),
-          inline: true,
-        },
-        {
-          name: t("server.last-column.top", placeholder_options),
-          value: t("server.last-column.bottom", placeholder_options),
-          inline: true,
-        },
-      ]);
     } else {
-      const ServerInfo = await serverStatus({
+      await handleServerStatus({
         server,
+        arrangedServers,
         serverResponse: response,
       });
-
-      const { memorizedLastMentionTimestamp, hideServersURLs } =
-        messageStore.getState();
-      const lastMentionedServer = memorizedLastMentionTimestamp.find(
-        (value) => value.serverName === server.name,
-      );
-
-      const placeholder_options = {
-        server_name: server.name,
-        server_status: ServerInfo,
-        server_runtime: response.version?.name ?? "",
-        server_url: hideServersURLs
-          ? t("commands.toggle-servers-urls.hidden")
-          : server.config.serverURL,
-        server_ip: server.config.serverIP,
-        server_port: server.config.serverPort,
-        version_protocol: response.version?.protocol ?? 0,
-        player_count: response.players?.online ?? 0,
-        max_player_count: response.players?.max ?? 0,
-        last_available: lastMentionedServer
-          ? `<t:${lastMentionedServer.timestamp}:R>`
-          : t("server.last-fetch.never"),
-      };
-
-      arrangedServers.push([
-        {
-          name: t("server.first-column.top", placeholder_options),
-          value: t("server.first-column.bottom", placeholder_options),
-          inline: true,
-        },
-        {
-          name: t("server.middle-column.top", placeholder_options),
-          value: t("server.middle-column.bottom", placeholder_options),
-          inline: true,
-        },
-        {
-          name: t("server.last-column.top", placeholder_options),
-          value: t("server.last-column.bottom", placeholder_options),
-          inline: true,
-        },
-      ]);
     }
   }
   return groupServers(arrangedServers);
