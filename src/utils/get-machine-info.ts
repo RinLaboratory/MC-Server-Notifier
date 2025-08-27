@@ -1,5 +1,5 @@
 import si from "systeminformation";
-import type { TSystemStatus, TServer } from "./validators";
+import type { TServer, TSystemStatus } from "./validators";
 import logger from "./logger";
 
 export async function getCurrentMachineInfo() {

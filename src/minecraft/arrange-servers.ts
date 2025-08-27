@@ -1,13 +1,13 @@
-import { getMachineStatus } from "~/machine/machine-status";
-import type { TServerResponse } from "~/utils/validators";
-import serverStatus from "./server-status";
-import { messageStore } from "~/store/message-store";
-import { groupServers } from "./group-servers";
-import { clientStore } from "~/store/client-store";
-import logger from "~/utils/logger";
 import type { APIEmbedField } from "discord.js";
-import { t } from "~/utils/translations";
+import type { TServerResponse } from "~/utils/validators";
 import { httpStatus } from "~/machine/http-status";
+import { getMachineStatus } from "~/machine/machine-status";
+import { clientStore } from "~/store/client-store";
+import { messageStore } from "~/store/message-store";
+import logger from "~/utils/logger";
+import { t } from "~/utils/translations";
+import { groupServers } from "./group-servers";
+import serverStatus from "./server-status";
 
 interface UpdateArrangementProps {
   serverResponse: TServerResponse[];

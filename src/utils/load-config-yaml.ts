@@ -1,10 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { parse as yamlParse } from "yaml";
-import { YamlConfigSchema } from "./validators";
-import { parseMentionUsers } from "./parse-mention-users";
 import { discordStore } from "~/store/discord-store";
 import { serverStore } from "~/store/server-store";
+import { parseMentionUsers } from "./parse-mention-users";
+import { YamlConfigSchema } from "./validators";
 
 export default async function loadConfigYaml() {
   const fileRoute = path.join(import.meta.dirname, "..", "config.yaml");

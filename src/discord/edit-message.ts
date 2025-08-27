@@ -1,8 +1,8 @@
 import { EmbedBuilder } from "discord.js";
 import type { TServerResponse } from "~/utils/validators";
-import { arrangeServers } from "../minecraft/arrange-servers";
 import { messageStore } from "~/store/message-store";
 import { t } from "~/utils/translations";
+import { arrangeServers } from "../minecraft/arrange-servers";
 
 interface EditMessageProps {
   serverResponse: TServerResponse[];

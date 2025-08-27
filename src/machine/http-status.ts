@@ -1,6 +1,6 @@
+import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import type { TServer } from "~/utils/validators";
 import * as http from "~/utils/http";
-import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 
 export async function httpStatus(
   server: TServer,

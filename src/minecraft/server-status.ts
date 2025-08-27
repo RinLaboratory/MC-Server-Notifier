@@ -1,8 +1,8 @@
-import mentionUsers from "../discord/mention-user";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
+import type { TServer } from "~/utils/validators";
 import { messageStore } from "~/store/message-store";
 import { t } from "~/utils/translations";
-import type { TServer } from "~/utils/validators";
+import mentionUsers from "../discord/mention-user";
 
 interface ServerStatusProps {
   serverResponse: Partial<JavaStatusLegacyResponse>;

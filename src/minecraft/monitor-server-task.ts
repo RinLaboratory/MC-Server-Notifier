@@ -1,7 +1,7 @@
+import type { TServerResponse } from "~/utils/validators";
 import editMessage from "~/discord/edit-message";
 import { serverStore } from "~/store/server-store";
 import { fetchServer } from "~/utils/fetch-server";
-import type { TServerResponse } from "~/utils/validators";
 
 export async function monitorServerTask() {
   const { servers } = serverStore.getState();
