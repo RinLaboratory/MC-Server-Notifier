@@ -1,9 +1,9 @@
 import type { TextChannel } from "discord.js";
+import type { TServer } from "~/utils/validators";
 import { clientStore } from "~/store/client-store";
 import { discordStore } from "~/store/discord-store";
 import { messageStore } from "~/store/message-store";
 import logger from "~/utils/logger";
-import type { TServer } from "~/utils/validators";
 
 interface MentionUsersProps {
   server: TServer;

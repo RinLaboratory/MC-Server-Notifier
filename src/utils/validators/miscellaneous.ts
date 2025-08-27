@@ -11,7 +11,7 @@ export type TServerConfig = z.infer<typeof ConfigSchema>;
 
 export const ServerSchema = z.object({
   name: z.string(),
-  isMachine: z.coerce.boolean().optional(),
+  type: z.enum(["machine", "server", "http"]),
   config: ConfigSchema,
 });
 

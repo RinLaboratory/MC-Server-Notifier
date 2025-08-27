@@ -1,7 +1,7 @@
-import type { Collection } from "discord.js";
 import type {
-  SlashCommandBuilder,
   ChatInputCommandInteraction,
+  Collection,
+  SlashCommandBuilder,
 } from "discord.js";
 
 declare module "discord.js" {

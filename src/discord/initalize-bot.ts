@@ -1,5 +1,4 @@
-import { Client, Collection, GatewayIntentBits } from "discord.js";
-import { REST } from "discord.js";
+import { Client, Collection, GatewayIntentBits, REST } from "discord.js";
 import controllersHandler from "~/controllers";
 import { clientStore } from "~/store/client-store";
 import { discordStore } from "~/store/discord-store";

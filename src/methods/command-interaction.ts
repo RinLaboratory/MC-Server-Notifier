@@ -1,5 +1,5 @@
-import { MessageFlags } from "discord.js";
 import type { BaseInteraction } from "discord.js";
+import { MessageFlags } from "discord.js";
 import logger from "~/utils/logger";
 import { t } from "~/utils/translations";
 

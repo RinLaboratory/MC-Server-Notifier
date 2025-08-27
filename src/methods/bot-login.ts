@@ -1,5 +1,6 @@
-import { EmbedBuilder } from "discord.js";
 import type { TextChannel } from "discord.js";
+import { EmbedBuilder } from "discord.js";
+import type { TServerResponse } from "~/utils/validators";
 import { arrangeServers } from "~/minecraft/arrange-servers";
 import { clientStore } from "~/store/client-store";
 import { discordStore } from "~/store/discord-store";
@@ -7,7 +8,6 @@ import { serverStore } from "~/store/server-store";
 import { fetchServer } from "~/utils/fetch-server";
 import logger from "~/utils/logger";
 import { t } from "~/utils/translations";
-import type { TServerResponse } from "~/utils/validators";
 
 export async function onBotLogin() {
   const { client } = clientStore.getState();

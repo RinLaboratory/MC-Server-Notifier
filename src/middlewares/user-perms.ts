@@ -1,5 +1,5 @@
-import { MessageFlags } from "discord.js";
 import type { BaseInteraction, GuildMember } from "discord.js";
+import { MessageFlags } from "discord.js";
 import { t } from "~/utils/translations";
 
 type NextFunction = () => Promise<void> | void;

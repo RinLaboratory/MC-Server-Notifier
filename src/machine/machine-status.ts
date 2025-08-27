@@ -1,3 +1,4 @@
+import type { TServer, TSystemStatus } from "~/utils/validators";
 import mentionUsers from "~/discord/mention-user";
 import {
   getCurrentMachineInfo,
@@ -5,7 +6,6 @@ import {
 } from "~/utils/get-machine-info";
 import { t } from "~/utils/translations";
 import { validateLocalhostIp } from "~/utils/validate-localhost-ip";
-import type { TServer, TSystemStatus } from "~/utils/validators";
 
 interface GetCurrentMachineStatusProps {
   server: TServer;
