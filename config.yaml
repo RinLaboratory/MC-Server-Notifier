@@ -35,24 +35,20 @@ discordConfig:
     - "000000000000000000"
 
 servers:
-  - name: "localhost"
-    isMachine: true
+  - name: "windows"
+    type: "machine"
     config:
       serverIP: "127.0.0.1"
       serverPort: 1
       serverURL: "https://yourServerURLhere.com"
-  - name: "other-server-node"
-    isMachine: true
-    config:
-      serverIP: "192.168.0.1"
-      serverPort: 8000
-      serverURL: "https://yourServerURLhere.com"
   - name: "Auth"
+    type: "server"
     config:
       serverIP: "127.0.0.1"
       serverPort: 25565
       serverURL: "https://yourServerURLhere.com"
   - name: "Lobby"
+    type: "server"
     config:
       serverIP: "127.0.0.1"
       serverPort: 25565
