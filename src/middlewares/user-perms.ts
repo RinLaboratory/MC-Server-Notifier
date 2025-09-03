@@ -1,10 +1,10 @@
 import type { BaseInteraction, GuildMember } from "discord.js";
+import { t } from "@utils/translations";
 import { MessageFlags } from "discord.js";
-import { t } from "~/utils/translations";
 
 type NextFunction = () => Promise<void> | void;
 
-export default async function checkUserPermissions(
+export async function checkUserPermissions(
   interaction: BaseInteraction,
   next: NextFunction,
 ) {

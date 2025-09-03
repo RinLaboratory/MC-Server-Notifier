@@ -1,4 +1,4 @@
-import type { TServer } from "~/utils/validators";
+import type { TServer } from "@validators";
 
 interface State {
   servers: TServer[];

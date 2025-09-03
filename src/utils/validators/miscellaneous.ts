@@ -1,5 +1,26 @@
+import type { ServiceError } from "@utils/services";
+import type { BaseMessageOptions, InteractionReplyOptions } from "discord.js";
 import type { JavaStatusLegacyResponse } from "minecraft-server-util";
 import z from "zod";
+
+export type ServiceResult<T> =
+  | {
+      success: true;
+      data: T;
+      error?: never;
+    }
+  | {
+      success: false;
+      data?: never;
+      error: ServiceError;
+    };
+
+export interface InteractionReply {
+  content?: BaseMessageOptions["content"];
+  embeds?: BaseMessageOptions["embeds"];
+  flags?: InteractionReplyOptions["flags"];
+  components?: BaseMessageOptions["components"];
+}
 
 const ConfigSchema = z.object({
   serverIP: z.string().ip(),

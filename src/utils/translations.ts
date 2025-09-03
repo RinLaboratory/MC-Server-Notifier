@@ -1,4 +1,4 @@
-import { langStore } from "~/store/lang-store";
+import { langStore } from "@store";
 
 export function t(
   key: string,
