@@ -1,0 +1,14 @@
+.git
+.cache
+dist
+node_modules
+
+.env
+.env.*
+
+*.log
+.pnpm-debug.log*
+
+config.yaml
+config.yml
+pterodacty-egg.json

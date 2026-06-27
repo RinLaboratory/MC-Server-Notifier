@@ -14,6 +14,7 @@ This node server uses Discord WebHook to work.
   - [Understanding `.env` file](#understanding-env-file)
 - [Getting the development server running](#getting-the-development-server-running)
 - [Getting the production server running](#getting-the-production-server-running)
+- [Running with Docker, Pterodactyl or Kubernetes](#running-with-docker-pterodactyl-or-kubernetes)
 - [Setting up server in pterodactyl](#setting-up-server-in-pterodactyl)
 - [Learn More](#learn-more)
 
@@ -115,7 +116,63 @@ Once finished compiling, you will use the following command to run the productio
 pnpm start
 ```
 
-## Setting up server in pterodactyl
+## Running with Docker, Pterodactyl or Kubernetes
+
+Build the image:
+
+```bash
+docker build -t mc-server-notifier .
+```
+
+By default the container looks for user files in `/home/container`:
+
+- `config.yml` or `config.yaml`
+- `lang.yml` or `lang.yaml`
+
+The application files live in `/app`, so mounting a volume on `/home/container`
+will not hide the compiled bot files.
+
+Docker example:
+
+```bash
+docker run -d --name mc-server-notifier \
+  -v /path/to/server-files:/home/container \
+  mc-server-notifier
+```
+
+Pterodactyl-compatible volume:
+
+```text
+Host path:      /path/to/server-files
+Container path: /home/container
+```
+
+Place `config.yml` or `config.yaml` inside the host path. You can also place
+`lang.yml` or `lang.yaml` there if you want to customize the bot messages.
+
+This repository also includes a Pterodactyl egg at `pterodactyl-egg.json`.
+Import it in the panel and make sure its Docker image points to the image you
+built or published. By default the egg uses:
+
+```text
+server-notifier:latest
+```
+
+If your panel or Kubernetes manifest mounts the config somewhere else, set either:
+
+```bash
+CONFIG_DIR=/custom/config/folder
+LANG_DIR=/custom/lang/folder
+```
+
+or:
+
+```bash
+CONFIG_PATH=/custom/config/folder/config.yml
+LANG_PATH=/custom/lang/folder/lang.yaml
+```
+
+## Setting up server in pterodactyl (traditional)
 
 Its very tricky to get a node server running in pterodactyl, specially if typescript is involved.
 
