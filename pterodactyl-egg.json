@@ -1,0 +1,62 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-06-27T00:00:00Z",
+  "name": "MC Server Notifier JS",
+  "author": "noreply@rinlaboratory.io",
+  "description": "Discord bot that monitors Minecraft servers, machines and HTTP endpoints. This egg runs the pre-built Docker image and keeps config.yaml/config.yml plus lang.yaml/lang.yml editable in /home/container.",
+  "features": null,
+  "docker_images": {
+    "Server Notifier": "server-notifier:latest"
+  },
+  "file_denylist": [],
+  "startup": "node /app/dist/index.mjs",
+  "config": {
+    "files": "{}",
+    "startup": "{\"done\":\"app is successfully online\"}",
+    "logs": "{}",
+    "stop": "^^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/ash\nset -eu\ncd /mnt/server\n\nif [ ! -f config.yaml ] && [ ! -f config.yml ]; then\ncat > config.yaml <<'CONFIG_YAML'\n# MC Server Notifier configuration\n# Replace these placeholder values before starting the server.\n\ndiscordConfig:\n  DISCORD_BOT_CLIENT_ID: '000000000000000000'\n  DISCORD_BOT_GUILD_ID: '000000000000000000'\n  DISCORD_BOT_CHANNEL_ID: '000000000000000000'\n  DISCORD_BOT_TOKEN: ''\n  mentionUsers:\n    - '000000000000000000'\n\nservers:\n  - name: 'Local Machine'\n    type: 'machine'\n    config:\n      serverIP: '127.0.0.1'\n      serverPort: 1\n      serverURL: 'https://your-server.example.com'\n  - name: 'Minecraft Server'\n    type: 'server'\n    config:\n      serverIP: '127.0.0.1'\n      serverPort: 25565\n      serverURL: 'https://your-server.example.com'\nCONFIG_YAML\nfi\n\nif [ ! -f lang.yaml ] && [ ! -f lang.yml ]; then\ncat > lang.yaml <<'LANG_YAML'\n# MC Server Notifier language file\n\nlang:\n  commands:\n    reload:\n      reply: 'Configuracion recargada exitosamente'\n      description: 'Recarga la configuracion'\n    toggle-servers-urls:\n      reply:\n        shown: 'A partir de la proxima actualizacion se mostraran las URLs de los servidores'\n        hidden: 'A partir de la proxima actualizacion se esconderan las URLs de los servidores'\n      description: 'Esconde o muestra las URLs de los servidores'\n      hidden: '(Oculto)'\n    error: 'Ha ocurrido un error al ejecutar este comando'\n  embed:\n    title: 'Server Status'\n    description: 'Servidores bajo observacion'\n    footer: 'Ultima Actualizacion'\n  server:\n    first-column:\n      top: '{{server_name}}'\n      bottom: '{{server_status}}'\n    middle-column:\n      top: '{{server_runtime}}'\n      bottom: '{{server_url}}'\n    last-column:\n      top: 'Ult. Aviso'\n      bottom: '{{last_available}}'\n    status:\n      offline: 'Fuera de linea'\n      online: 'En linea'\n    last-fetch:\n      never: 'Nunca'\n  machine:\n    cpu-usage: '{{machine_name}} USO DE CPU'\n    ram-usage: '{{machine_name}} USO DE RAM'\n    disk-usage: '{{machine_name}} USO DE DISCO'\n  perms:\n    missing-perms: 'No tienes permisos'\nLANG_YAML\nfi\n\necho 'MC Server Notifier templates are ready in /mnt/server.'\necho 'Edit config.yaml before starting the server.'\nexit 0",
+      "container": "alpine:3.20",
+      "entrypoint": "ash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Node Environment",
+      "description": "Runtime mode for the bot. Keep this as production for Pterodactyl.",
+      "env_variable": "NODE_ENV",
+      "default_value": "production",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|string|in:production,development",
+      "field_type": "text"
+    },
+    {
+      "name": "Config Directory",
+      "description": "Directory where config.yml/config.yaml is mounted inside the container.",
+      "env_variable": "CONFIG_DIR",
+      "default_value": "/home/container",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|string",
+      "field_type": "text"
+    },
+    {
+      "name": "Language Directory",
+      "description": "Directory where lang.yml/lang.yaml is mounted inside the container.",
+      "env_variable": "LANG_DIR",
+      "default_value": "/home/container",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|string",
+      "field_type": "text"
+    }
+  ]
+}
