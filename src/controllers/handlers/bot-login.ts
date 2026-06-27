@@ -2,6 +2,7 @@
 import { botLoginService } from "@services/bot-login";
 import { clientStore } from "@store";
 import { logger } from "@utils/services";
+import { Events } from "discord.js";
 
 export default async function botLogin() {
   const { client } = clientStore.getState();
@@ -13,9 +14,10 @@ export default async function botLogin() {
   // Tackle race condition caused client.once expecting a void return instead of a promise
   await new Promise<void>((resolve) => {
     if (client.isReady()) {
-      return resolve();
+      void botLoginService.onBotLogin().then(() => resolve());
+      return;
     }
-    client.once("ready", async () => {
+    client.once(Events.ClientReady, async () => {
       await botLoginService.onBotLogin();
       resolve();
     });
